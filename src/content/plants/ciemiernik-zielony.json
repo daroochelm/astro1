@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776319618/ciemiernik_zielony_gwng7q.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776319618/ciemiernik_zielony_gwng7q.jpg",
+    "caption": "Ciemiernik zielony",
+    "latina": "(Helleborus viridis L.)",
+    "family": "jaskrowate",
+    "flowering": "Luty-kwiecień",
+	"months": [2, 3, 4],
+    "habitat": "Występuje w stanie dzikim w południowo-zachodniej i zachodniej Europie, na północy sięga do Anglii, a na wschodzie do Szwajcarii i Austrii.",
+    "occurrence": "Górskie lasy lub zarośla na wilgotnych lub wapiennych glebach.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Wszystkie części tej rośliny są silnie trujące dla ludzi, kotów i psów. Zawiera glikozydy nasercowe, helleborinę i pyrrolizydynę, które mogą powodować poważne zatrucia (bóle brzucha, zawroty głowy, problemy z oddychaniem).",
+    "category": "Jaskrowce",
+    "id": 61
+}

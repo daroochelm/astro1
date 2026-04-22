@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776324536/kukulka_plamista_rsh7jg.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776324536/kukulka_plamista_rsh7jg.jpg",
+    "caption": "Kukułka plamista",
+    "latina": "(Dactylorhiza maculata (L.) Soó)",
+    "family": "storczykowate",
+    "flowering": "Maj-lipiec",
+	"months": [5, 6, 7],
+    "habitat": "Występuje tylko w Europie, od Wysp Brytyjskich po europejską część Rosji. Brak go w Norwegii oraz w południowo-wschodniej części Europy. W Polsce występuje dość często na terenie całego kraju.",
+    "occurrence": "Rośnie na mokrych łąkach, na torfowiskach niskich i przejściowych, a także w zbiorowiskach lasów łęgowych. Zasiedla miejsca otwarte lub umiarkowanie zacienione. W górach występuje po regiel dolny.",
+    "protection": "Częściowa ochrona gatunkowa",
+    "description": "Kwiaty większości kukułek, w tym plamistej, nie produkują nektaru. Storczyki te stosują strategię zwabiania owadów barwą i kształtem, oszukując je.",
+    "category": "Szparagowce",
+    "id": 53
+}

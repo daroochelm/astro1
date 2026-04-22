@@ -1,0 +1,16 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776845863/wierzbownica_drobnokeiatowa_fpaeaa.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776845863/wierzbownica_drobnokeiatowa_fpaeaa.jpg",
+    "caption": "Wierzbownica kosmata",
+    "latina": "(Epilobium hirsutum L.)",
+    "family": "wiesiołkowate",
+    "flowering": "Czerwiec-wrzesień",
+	"months": [6, 7, 8, 9],
+    "habitat": "Rodzimym obszarem występowania tego gatunku jest Azja, Europa i Afryka, ale rozprzestrzenił się także w Makaronezji i Ameryce Północnej. W Polsce jest dość pospolity, zarówno na niżu, jak i w niższych położeniach górskich.",
+    "occurrence": "Siedliskiem są brzegi wód, wilgotne łąki i zarośla.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Nazwa 'kosmata' pochodzi od gęstych, miękkich włosków pokrywających całą roślinę. Bylina ta potrafi dorosnąć do 2 metrów wysokości.",
+    "category": "Mirtowce",
+    "id": "90"
+
+}

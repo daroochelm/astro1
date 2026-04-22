@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776534951/zdrojowka_rutewkowata_goai9z.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776534951/zdrojowka_rutewkowata_goai9z.jpg",
+    "caption": "Zdrojówka rutewkowata",
+    "latina": "(Isopyrum thalictroides L.)",
+    "family": "jaskrowate",
+    "flowering": "Marzec-maj",
+	"months": [3, 4, 5],
+    "habitat": "Występuje w południowej oraz środkowej Europie. W Polsce roślina średnio pospolita, głównie w Polsce centralnej i wschodniej, w Polsce zachodniej jest wielką rzadkością.",
+    "occurrence": "Występuje w cienistych lasach liściastych i zaroślach. Wymaga gleb próchnicznych lub gliniastych.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Zdrojówka jest geofitem, co oznacza, że po wydaniu nasion (wiosną) jej nadziemna część zamiera, a roślina znika w glebie, przetrwając jedynie dzięki pełzającym, trwałym kłączom.",
+    "category": "Jaskrowce",
+    "id": 29
+}

@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776620832/wyka_lesna_owwvxz.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776620832/wyka_lesna_owwvxz.jpg",
+    "caption": "Wyka leśna",
+    "latina": "(Vicia sylvatica L.)",
+    "family": "bobowate",
+    "flowering": "Czerwiec-lipiec",
+	"months": [6, 7],
+    "habitat": "Występuje w Europie i zachodniej Azji. W Polsce częsta jest na północy i południu kraju, rzadsza w pasie środkowym.",
+    "occurrence": "Występuje na glebach świeżych, żyznych i średnio żyznych, o odczynach od lekko kwaśnego do zasadowego. Spotykana w grądach i buczynach, a także w zbiorowiskach okrajkowych, w porębach, na polanach śródleśnych itp.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Jest cenną rośliną dla zapylaczy, zwłaszcza dla trzmieli i miesierek, które odwiedzają jej kwiaty w poszukiwaniu nektaru i pyłku.",
+    "category": "Bobowce",
+    "id": 63
+}

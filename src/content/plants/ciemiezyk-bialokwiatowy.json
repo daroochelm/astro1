@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776336934/ciemiezyk_bialokwiatowy_ydqhut.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776336934/ciemiezyk_bialokwiatowy_ydqhut.jpg",
+    "caption": "Ciemiężyk białokwiatowy",
+    "latina": "Vincetoxicum hirundinaria Medik.)",
+    "family": "toinowate",
+    "flowering": "Maj-sierpień",
+	"months": [5, 6, 7, 8],
+    "habitat": "Występuje w Europie Południowej, Środkowej i Wschodniej, w Afryce Północnej (Algieria, Maroko), w Turcji i na Kaukazie. W Polsce jest dość rozpowszechniony na niżu i w niższych położeniach górskich.",
+    "occurrence": "Występuje w lasach i zaroślach, szczególnie często na podłożu wapiennym w Tatrach i Pieninach.",
+    "protection": "Podlega ochronie gatunkowej (częściowej lub ścisłej w zależności od źródeł lokalnych)",
+    "description": "Kwiaty rośliny działają jak pułapki. Owady, próbując wydostać się z pułapki, przenoszą pyłek, co ułatwia zapylenie.",
+    "category": "Goryczkowce",
+    "id": 4
+}

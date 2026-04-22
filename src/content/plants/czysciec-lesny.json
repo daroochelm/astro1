@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776708147/czysciec_lesny_pyqki9.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776708147/czysciec_lesny_pyqki9.jpg",
+    "caption": "Czyściec leśny",
+    "latina": "(Stachys sylvatica L.)",
+    "family": "jasnotowate",
+    "flowering": "Czerwiec-wrzesień",
+	"months": [6, 7, 8, 9],
+    "habitat": "Czyściec leśny występuje na terenie Europy oraz obszarach Azji o umiarkowanym klimacie. W Polsce jest pospolity na całym niżu i w niższych położeniach górskich.",
+    "occurrence": "Gatunek azotolubny, preferuje gleby świeże. Występuje w górskich olszynach, grądach i buczynach.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Czyściec leśny jest często nazywany polskim odpowiednikiem popularnego czystka (cistus), ponieważ działa wzmacniająco na organizm, przeciwwirusowo, przeciwgrzybiczo i przeciwzapalnie.",
+    "category": "Jasnotowce",
+    "id": 83
+}

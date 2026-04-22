@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776398744/niecierpek_drobnokwiatowy_axsaiy.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776398744/niecierpek_drobnokwiatowy_axsaiy.jpg",
+    "caption": "Niecierpek drobnokwiatowy",
+    "latina": "(Impatiens parviflora DC.)",
+    "family": "niecierpkowate",
+    "flowering": "Czerwiec-październik",
+	"months": [6, 7, 8, 9, 10],
+    "habitat": "Występował pierwotnie w północno-wschodniej i centralnej Azji oraz wschodniej Europie. W XIX wieku zdziczały z ogrodów botanicznych zadomowił się w prawie całej Europie. Rozpowszechniony w całej Polsce.",
+    "occurrence": "Występuje w lasach liściastych, parkach, na cmentarzach, w ogrodach, w miejscach ruderalnych, na nasypach kolejowych. Wymaga gleby żyznej i preferuje stanowiska cieniste.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Liście po ugotowaniu są jadalne, lecz nie należy spożywać regularnie dużych ilości ze względu na możliwą obecność szczawianu wapnia.",
+    "category": "Wrzosowce",
+    "id": 77
+}

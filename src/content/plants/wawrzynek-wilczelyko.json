@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776484678/wawrzynek_wilcze_cdcbpx.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776484678/wawrzynek_wilcze_cdcbpx.jpg",
+    "caption": "Wawrzynek wilczełyko",
+    "latina": "(Daphne mezereum L.)",
+    "family": "wawrzynkowate",
+    "flowering": "Luty-kwiecień",
+	"months": [2, 3, 4],
+    "habitat": "Występuje w całej Europie, w zachodniej Syberii, na Ałtaju i Kaukazie, a także w Azji Mniejszej. W Polsce rośnie na całym terytorium, ale jest rośliną rzadką.",
+    "occurrence": "Preferuje siedliska w żyznych lasach liściastych i mieszanych, szczególnie buczynach, grądach i jaworzynach. Preferuje miejsca cieniste lub półcieniste, o glebie wilgotnej, chłodnej, bogatej w wapń.",
+    "protection": "Częściowa ochrona gatunkowa",
+    "description": "Cała roślina jest silnie trująca (zawiera mezereinę i dafninę). Zjedzenie już kilku owoców może być śmiertelne dla dziecka, a kontakt skóry z sokiem wywołuje stany zapalne i pęcherze.",
+    "category": "Ślazowce",
+    "id": 25
+}

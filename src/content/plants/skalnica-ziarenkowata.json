@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776335856/skalnica_ziarenkowata_xwtfun.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776335856/skalnica_ziarenkowata_xwtfun.jpg",
+    "caption": "Skalnica ziarenkowata",
+    "latina": "(Saxifraga granulata L.)",
+    "family": "skalnicowate",
+    "flowering": "Kwiecień-czerwiec",
+	"months": [4, 5, 6],
+    "habitat": "Występuje w całej Europie. W Polsce dość pospolita na niżu, w górach rzadka.",
+    "occurrence": "Rośnie na suchych, ubogich murawach, jako jedna z nielicznych skalnic nie występuje w górach. Rośnie również w widnych lasach, na ich brzegach i na przydrożach, umiarkowanie nawożonych łąkach.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Nazwa pochodzi od licznych, bulwkowatych rozmnóżek o średnicy ok. 5 mm, które znajdują się na kłączu i służą do wegetatywnego rozmnażania.",
+    "category": "Skalnicowce",
+    "id": 71
+}

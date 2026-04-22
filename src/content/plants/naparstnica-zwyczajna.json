@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776447690/naparstnica_zwyczajna_o000h6.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776447690/naparstnica_zwyczajna_o000h6.jpg",
+    "caption": "Naparstnica zwyczajna",
+    "latina": "(Digitalis grandiflora Mill.)",
+    "family": "babkowate",
+    "flowering": "Czerwiec-lipiec",
+	"months": [6, 7],
+    "habitat": "Występuje na terenie niemal całej Europy oraz w Azji Mniejszej. W Polsce spotkać ją można zarówno na niżu, jak i w górach.",
+    "occurrence": "Rośnie głównie w świetlistych lasach, w wolnych przestrzeniach kosodrzewiny, na porębach leśnych, na obrzeżach lasów, w ziołoroślach górskich.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Wszystkie naparstnice są gatunkami silnie trującymi. Naparstnica zwyczajna zawiera liczne saponiny i toksyczne glikozydy kardenolidowe: digitoksynę, digoksynę, lanatozyd A i inne. Ich działanie kumuluje się w organizmie.",
+    "category": "Jasnotowce",
+    "id": 50
+}

@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776452552/groszek_lakowy_doovqb.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776452552/groszek_lakowy_doovqb.jpg",
+    "caption": "Groszek łąkowy",
+    "latina": "(Lathyrus pratensis L.)",
+    "family": "bobowate",
+    "flowering": "Czerwiec-lipiec",
+	"months": [6, 7],
+    "habitat": "Rośnie dziko w Azji, Europie i Afryce Północnej. Jest pospolity na terenie całej Polski.",
+    "occurrence": "Rośnie na łąkach, pastwiskach, w zaroślach i na obrzeżach lasów.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Jego łodygi są wiotkie i rozgałęzione, a dzięki wąsom czepnym potrafi wspinać się po innych roślinach, tworząc zwarte zarośla.",
+    "category": "Bobowce",
+    "id": 12
+}

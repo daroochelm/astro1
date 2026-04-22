@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776455027/jastrzebiec_kosmaczek_l3eq1g.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776455027/jastrzebiec_kosmaczek_l3eq1g.jpg",
+    "caption": "Kosmaczek łąkowy",
+    "latina": "(Pilosella caespitosa (Dumort.) P.D.Sell & C.West)",
+    "family": "astrowate",
+    "flowering": "Maj-czerwiec",
+	"months": [5, 6],
+    "habitat": "Występuje w Europie i Azji na obszarze od Francji po Syberię i Kaukaz. W Polsce jest dość częsty na niżu, zwłaszcza w jego południowo-zachodniej części.",
+    "occurrence": "występuje w Europie i Azji (od Francji po Syberię i Kaukaz). W Polsce jest dość pospolity na niżu, ze szczególnym uwzględnieniem południowo-zachodniej części kraju. Preferuje stanowiska słoneczne, takie jak łąki, pastwiska, murawy, torfowiska niskie oraz skraje lasów.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Choć dla pszczół jest pożyteczny, zjedzony w dużej ilości może być trujący dla owiec.",
+    "category": "Astrowce",
+    "id": 35
+}

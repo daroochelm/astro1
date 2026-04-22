@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776581569/kokoryczka_wonna_xvtutb.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776581569/kokoryczka_wonna_xvtutb.jpg",
+    "caption": "Kokoryczka wonna",
+    "latina": "(Polygonatum odoratum (Mill) Druce)",
+    "family": "szparagowate",
+    "flowering": "Maj-czerwiec",
+	"months": [5, 6],
+    "habitat": "Występuje na terenie prawie całej Europy, a także w Azji i Ameryce Północnej. W Polsce roślina dość rozpowszechniona.",
+    "occurrence": "Rośnie w widnych lasach (ciepłolubnych i acydofilnych dąbrowach, w borach sosnowych i borach mieszanych), w zaroślach i zbiorowiskach okrajkowych.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Tradycyjnie stosowana w ziołolecznictwie do obniżania poziomu cukru we krwi, ciśnienia oraz cholesterolu. Działa również kojąco na stany zapalne.",
+    "category": "Szparagowce",
+    "id": 81
+}

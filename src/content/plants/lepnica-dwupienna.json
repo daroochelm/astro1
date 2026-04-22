@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776716969/lepnica_dwupienna_nxbe5c.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776716969/lepnica_dwupienna_nxbe5c.jpg",
+    "caption": "Lepnica czerwona",
+    "latina": "(Silene dioica (L.) Clairv.)",
+    "family": "goździkowate",
+    "flowering": "Kwiecień-wrzesień",
+	"months": [4, 5, 6, 7, 8, 9],
+    "habitat": "Występuje na większości obszaru Europy i w Afryce Północnej (Maroko). W Polsce pospolity.",
+    "occurrence": "Preferuje miejsca cieniste, gleby żyzne, wilgotne, zasobne w azot.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Mimo że jej kwiaty są barwne, w odróżnieniu od wielu innych roślin, nie pachną i zamykają się na noc.",
+    "category": "Goździkowce",
+    "id": 56
+}

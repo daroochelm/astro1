@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776749079/zankiel_zwyczajny_dzrhne.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776749079/zankiel_zwyczajny_dzrhne.jpg",
+    "caption": "Żankiel zwyczajny",
+    "latina": "(Sanicula europaea L.)",
+    "family": "selerowate",
+    "flowering": "Maj-lipiec",
+	"months": [5, 6, 7],
+    "habitat": "Występuje niemal w całej Europie, w północno-zachodniej Afryce oraz w zachodniej Azji.",
+    "occurrence": "Roślina występuje w cienistych lasach liściastych i zaroślach. Preferuje gleby zasobne w wapń i umiarkowanie wilgotne.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Żankiel jest gatunkiem charakterystycznym dla żyznych lasów liściastych (żyznych buczyn i dąbrow), co oznacza, że jego obecność świadczy o bardzo dobrej jakości glebie.",
+    "category": "Selerowce",
+    "id": 18
+}

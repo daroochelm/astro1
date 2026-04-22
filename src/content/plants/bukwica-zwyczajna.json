@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776320488/bukwica_zwyczajna_b6jidu.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776320488/bukwica_zwyczajna_b6jidu.jpg",
+    "caption": "Bukwica zwyczajna",
+    "latina": "(Stachys officinalis (L.) Trevis., syn. Betonica officinalis L.)",
+    "family": "jasnotowate",
+    "flowering": "Czerwiec-wrzesień",
+	"months": [6, 7, 8 ,9],
+    "habitat": "Występuje w Afryce Północnej (Algieria, Maroko, Tunezja), w całej niemal Europie oraz na obszarach Azji o umiarkowanym klimacie (Zachodnia Syberia, Turcja, Kaukaz). W Polsce jest średnio pospolity.",
+    "occurrence": "Rośnie w świetlistych lasach i zaroślach, na miedzach, murawach i łąkach. W górach występuje po regiel dolny.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Współcześnie potwierdzono, że bukwica działa silnie ściągająco, przeciwzapalnie i przeciwbakteryjnie, co czyni ją użyteczną w gojeniu ran oraz stanach zapalnych jamy ustnej. Bukwica wykazuje działanie uspokajające, łagodzi nerwice i ułatwia zasypianie.",
+    "category": "Jasnotowce",
+    "id": 58
+}

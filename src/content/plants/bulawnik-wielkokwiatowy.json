@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776335675/bulawnik_wielkokwiatowy_ekcmps.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776335675/bulawnik_wielkokwiatowy_ekcmps.jpg",
+    "caption": "Buławnik wielkokwiatowy",
+    "latina": "(Cephalanthera damasonium (Mill.) Druce)",
+    "family": "storczykowate",
+    "flowering": "Maj-czerwiec",
+	"months": [5, 6],
+    "habitat": "Występuje w południowej i środkowej Europie oraz w Turcji. W Polsce jest gatunkiem rzadkim i w ostatnich latach zmniejsza się liczba jego stanowisk. Występuje na niżu i w niższych położeniach górskich. Dużo częściej występuje w południowych regionach Polski.",
+    "occurrence": "Rośnie w świetlistych lasach liściastych i zaroślach (m.in. jest gatunkiem charakterystycznym dla buczyny storczykowej). Roślina wapieniolubna.",
+    "protection": "Ochrona ścisła",
+    "description": "W przeciwieństwie do wielu innych storczyków, buławnik wielkokwiatowy często nie potrzebuje owadów do zapylenia. Jego kwiaty są tak skonstruowane, że pyłkowiny mogą bezpośrednio zetknąć się ze znamieniem słupka, co zapewnia niemal 100% skuteczność w zawiązywaniu owoców.",
+    "category": "Szparagowce",
+    "id": 60
+}

@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776484912/sniezyca_wiosenna_dretci.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776484912/sniezyca_wiosenna_dretci.jpg",
+    "caption": "Śnieżyca wiosenna",
+    "latina": "(Leucojum vernum)",
+    "family": "amarylkowate",
+    "flowering": "Luty-kwiecień",
+	"months": [2, 3, 4],
+    "habitat": "Występuje w stanie dzikim w środkowej i południowej Europie z wyjątkiem obszaru śródziemnomorskiego. W Polsce rośnie głównie w Sudetach i Karpatach.",
+    "occurrence": "Rośnie w lasach łęgowych oraz na kwaśnych i wilgotnych łąkach. Lubi wilgotne lub mokre gleby brunatne i mady próchnicze o odczynie kwaśnym do zasadowego.",
+    "protection": "Częściowa ochrona gatunkowa",
+    "description": "Roślina zawiera alkaloidy, które są trujące dla ludzi i zwierząt.",
+    "category": "Szparagowce",
+    "id": 27
+}

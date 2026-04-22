@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776752847/czerniec_gronkowy_e1tgjj.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776752847/czerniec_gronkowy_e1tgjj.jpg",
+    "caption": "Czerniec gronkowy",
+    "latina": "(Actaea spicata L.)",
+    "family": "jaskrowate",
+    "flowering": "Maj-czerwiec",
+	"months": [5, 6],
+    "habitat": "Występuje w stanie dzikim w prawie całej Europie oraz w umiarkowanej strefie Azji, sięgając na wschód po Chiny.",
+    "occurrence": "Występuje w cienistych lasach bukowych, zboczach, w wąwozach i w górach. Rośnie na glebach wilgotnych, bogatych w wapń, zwykle luźnych i kamienistych",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Ziele czerńca działa odstraszająco na owady, roztocza i gryzonie.",
+    "category": "Jaskrowce",
+    "id": 67
+}

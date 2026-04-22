@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776615704/gajowiec_zolty_qzbhs1.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776615704/gajowiec_zolty_qzbhs1.jpg",
+    "caption": "Jasnota gajowiec",
+    "latina": "(Lamium galeobdolon (L.) L.)",
+    "family": "jasnotowate",
+    "flowering": "Kwiecień-czerwiec",
+	"months": [4, 5, 6],
+    "habitat": "Występuje w lasach liściastych w Europie i Azji. W Polsce jest rośliną szeroko rozpowszechnioną.",
+    "occurrence": "Wymaga gleb żyznych i nieco wilgotnych, tworzących się zwykle na słabo zakwaszonych glinach lub na piaskach gliniastych. Rośnie w lasach liściastych i zaroślach. W górach występuje aż po piętro kosodrzewiny.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Po roztarciu liście wydzielają przyjemny, lekko cytrusowy zapach.",
+    "category": "Jasnotowce",
+    "id": 10
+}

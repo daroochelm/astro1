@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776349724/bodziszek_blotny_fpfcj7.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776349724/bodziszek_blotny_fpfcj7.jpg",
+    "caption": "Bodziszek błotny",
+    "latina": "(Geranium palustre L.)",
+    "family": "bodziszkowate",
+    "flowering": "Czerwiec-październik",
+	"months": [6, 7, 8, 9, 10],
+    "habitat": "Występuje w całej niemal Europie oraz na Kaukazie i w Turcji. W Polsce jest rozpowszechniony na całym obszarze.",
+    "occurrence": "Porasta wilgotne łąki, zarośla, przydroża, rowy. W górach występuje po regiel dolny.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Napar z bodziszka błotnego (dawniej stosowany) ma właściwości ściągające i łagodzące, co wykorzystywano do przemywania skóry oraz jamy ustnej.",
+    "category": "Bodziszkowce",
+    "id": 1
+}

@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776339703/janowiec_barwierski_velaat.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776339703/janowiec_barwierski_velaat.jpg",
+    "caption": "Janowiec barwierski",
+    "latina": "(Genista tinctoria L.)",
+    "family": "bobowate",
+    "flowering": "Czerwiec-sierpień",
+	"months": [6, 7, 8],
+    "habitat": "Występuje na znacznej część Europy i Azji. W Polsce średnio pospolity.",
+    "occurrence": "Najlepiej rośnie na glebach ubogich, piaszczystych, gliniastych lub kamienistych, często o odczynie kwaśnym lub obojętnym.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Z kwiatów i pędów pozyskiwano dawniej trwały, żółty barwnik (genisteinę) do barwienia tkanin, m.in. na kolor cytrynowy i miodowy.",
+    "category": "Bobowce",
+    "id": 15
+}

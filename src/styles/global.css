@@ -1,0 +1,97 @@
+/* --- FUNDAMENTY --- */
+body {
+    background-color: #121614 !important; /* Pancerna baza */
+    color: #e2e8f0;
+    transition: background-color 2s ease;
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+  
+  /* --- NAGŁÓWEK --- */
+  .hero-header { text-align: center; margin: 1rem 0 3.5rem; }
+  .hero-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    font-family: ui-serif, Georgia, serif;
+    margin: 0;
+    background: linear-gradient(135deg, #0d1a0d 0%, #22c55e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+  }
+  .hero-subtitle { display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 5px; color: #666; margin-top: 1rem; }
+  .title-accent { width: 50px; height: 4px; background: #4ade80; margin: 1.5rem auto 0; border-radius: 2px; }
+  
+  /* --- BANER I STATYSTYKI --- */
+  .seasonal-banner {
+    background: linear-gradient(90deg, #1a2e1a 0%, #0d0d0d 100%);
+    border: 1px solid #2d4a2d; border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .banner-content { display: flex; align-items: center; gap: 12px; }
+  .pulse-icon { width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; animation: pulse-green 2s infinite; }
+  @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); } 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); } }
+  .view-now-btn { background: #4ade80; color: #050505; border: none; padding: 0.6rem 1.2rem; border-radius: 20px; font-weight: 600; cursor: pointer; }
+  
+  .stats-dashboard { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .stat-card { display: flex; flex-direction: column; align-items: center; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; min-width: 130px; }
+  .stat-number { font-size: 2rem; font-weight: 800; color: #fff; }
+  .stat-label { font-size: 0.7rem; color: #aaa; text-transform: uppercase; }
+  
+  /* --- WYSZUKIWARKA I FILTRY --- */
+  .search-container { max-width: 600px; margin: 0 auto 2rem; position: relative; }
+  .search-input { width: 100%; padding: 1rem 1rem 1rem 3.5rem; font-size: 1.1rem; border: 2px solid #2d4a2d; border-radius: 30px; background: #0a0f0a; color: white; outline: none; }
+  .search-icon { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: #4ade80; }
+  
+  .filters, .month-filters { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .filter-btn, .month-btn { padding: 0.5rem 1.2rem; border: 1px solid #333; background: #1a1a1a; color: #ccc; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+  .filter-btn.active, .month-btn.active { background: #4ade80; color: #000; border-color: #4ade80; font-weight: bold; }
+  
+  /* --- GALERIA I EFEKTY --- */
+  .gallery-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; width: 100%; }
+  .gallery-item {
+    position: relative; overflow: hidden; border-radius: 12px;
+    width: calc(33.333% - 1rem); min-width: 300px; flex-grow: 1;
+    cursor: pointer; background: #111; transform-style: preserve-3d; will-change: transform;
+  }
+  .gallery-item::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.15) 35%, transparent 70%);
+    opacity: 0; transition: opacity 0.4s; pointer-events: none; z-index: 2; mix-blend-mode: color-dodge;
+  }
+  .gallery-item:hover::after { opacity: 1; }
+  
+  .grid-img-botanical { width: 100%; opacity: 0; transition: opacity 0.8s, transform 0.6s; }
+  .grid-img-botanical.loaded { opacity: 1; }
+  .gallery-item:hover .grid-img-botanical { transform: scale(1.06); filter: brightness(0.85); }
+  
+  .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%); display: flex; align-items: flex-end; padding: 1.5rem; opacity: 0; transition: 0.4s; }
+  .gallery-item:hover .overlay { opacity: 1; }
+  .caption-pl { color: #fff; font-weight: 700; display: block; }
+  .caption-latina { color: #4ade80; font-style: italic; font-size: 0.9rem; }
+  
+  /* --- MODYFIKACJE CZASOWE --- */
+  body.theme-morning { background-color: #101513 !important; }
+  body.theme-morning .hero-header h1 { background: linear-gradient(135deg, #1a2b25 0%, #7ee8fa 100%); -webkit-background-clip: text; }
+  body.theme-golden { background-color: #17130e !important; }
+  body.theme-golden .hero-header h1 { background: linear-gradient(135deg, #422006 0%, #fbbf24 100%); -webkit-background-clip: text; }
+  body.theme-night { background-color: #08090a !important; }
+  body.theme-night .hero-header h1 { background: linear-gradient(135deg, #0f172a 0%, #94a3b8 100%); -webkit-background-clip: text; }
+  
+  /* --- AUDIO --- */
+  .audio-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); border: 1px solid #333; z-index: 1000; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; }
+  .audio-btn.is-playing { border-color: #4ade80; animation: audio-pulse 3s infinite; }
+  .hidden { display: none !important; }
+  
+  /* --- LIGHTBOX (Global) --- */
+  body.lightbox-open { overflow: hidden; }
+  #custom-lightbox { position: fixed; inset: 0; z-index: 99999; display: flex; opacity: 0; pointer-events: none; transition: 0.3s; }
+  #custom-lightbox:not(.hidden) { opacity: 1; pointer-events: auto; }
+  .cl-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.97); }
+  .cl-sidebar { width: 360px; height: 100%; background: #050505; padding: 2rem; border-left: 1px solid #222; overflow-y: auto; color: white; z-index: 2; }
+  .cl-image-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; z-index: 1; }
+  .absolute-contain { max-width: 90%; max-height: 85%; border-radius: 8px; box-shadow: 0 10px 40px #000; }

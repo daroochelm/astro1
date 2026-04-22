@@ -1,0 +1,708 @@
+---
+// src/pages/index.astro
+import { getCollection } from 'astro:content';
+
+const allPlants = await getCollection('plants');
+
+// --- LOGIKA DATY I SEZONU ---
+const now = new Date();
+const currentMonthIndex = now.getMonth() + 1;
+
+const monthNamesPl = [
+  "styczniu", "lutym", "marcu", "kwietniu", "maju", "czerwcu", 
+  "lipcu", "sierpniu", "wrześniu", "październiku", "listopadzie", "grudniu"
+];
+const currentMonthName = monthNamesPl[currentMonthIndex - 1];
+
+// Przygotowanie danych 
+let images = allPlants.map((plant) => ({
+  ...plant.data,
+  slug: plant.id,
+  isFloweringNow: plant.data.months && plant.data.months.includes(currentMonthIndex)
+}));
+
+// Sortowanie z polskim alfabetem
+images.sort((a, b) => a.caption.localeCompare(b.caption, 'pl'));
+
+// Nadanie globalnych indeksów dla Lightboxa
+images = images.map((img, index) => ({
+  ...img,
+  globalIndex: index
+}));
+
+// Statystyki
+const totalPlants = images.length;
+const uniqueFamiliesCount = new Set(images.map(img => img.family).filter(Boolean)).size;
+const protectedPlantsCount = images.filter(img => {
+  if (!img.protection) return false;
+  const p = img.protection.toLowerCase().trim();
+  return p !== 'brak ochrony gatunkowej';
+}).length;
+
+const floweringNowCount = images.filter(img => img.isFloweringNow).length;
+
+const uniqueCategories = [...new Set(images.map(img => img.category).filter(Boolean))]
+  .sort((a, b) => a.localeCompare(b, 'pl'));
+
+// Logika Dashboardu: Ostatnio dodane i data
+const todayDate = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
+const recentImages = [...images]
+  .sort((a, b) => a.id - b.id)
+  .slice(0, 4);
+
+const allMonths = [
+  { value: '1', label: 'Sty' }, { value: '2', label: 'Lut' }, { value: '3', label: 'Mar' },
+  { value: '4', label: 'Kwi' }, { value: '5', label: 'Maj' }, { value: '6', label: 'Cze' },
+  { value: '7', label: 'Lip' }, { value: '8', label: 'Sie' }, { value: '9', label: 'Wrz' },
+  { value: '10', label: 'Paź' }, { value: '11', label: 'Lis' }, { value: '12', label: 'Gru' }
+];
+
+// Generowanie bazy dla Lightboxa
+const galleryData = images.map((image) => {
+  const relatedPlants = images
+    .filter(p => p.family === image.family && p.slug !== image.slug)
+    .slice(0, 3);
+
+  const blurThumb = image.thumb ? image.thumb.replace('/upload/', '/upload/w_50,e_blur:1000,f_auto,q_10/') : '';
+
+  return { 
+    ...image, 
+    searchData: image.caption.toLowerCase(),
+    monthsData: image.months ? image.months.join(',') : '',
+    blurThumb: blurThumb,
+    relatedData: relatedPlants.map(p => ({
+      title: p.caption,
+      thumb: p.thumb,
+      index: p.globalIndex
+    }))
+  };
+});
+// Wstrzykuje nowy rozmiar jako dodatkowy "krok" w linku Cloudinary
+function getOptimizedUrl(fullUrl, width) {
+  if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
+  
+  // Rozcinamy link w miejscu "upload/"
+  const parts = fullUrl.split('upload/');
+  
+  // Wstrzykujemy nowy rozmiar z ukośnikiem (np. "w_400,c_scale/")
+  // Wynik będzie wyglądał tak: .../upload/w_400,c_scale/f_auto,q_auto/...
+  return `${parts[0]}upload/w_${width},c_scale/${parts[1]}`;
+}
+---
+
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <title>Galeria Botaniczna | Autorska Fotografia Przyrodnicza</title>
+  </head>
+  <body>
+    <main>
+      <header class="hero-header">
+        <h1>Galeria Botaniczna</h1>
+        <span class="hero-subtitle">Autorska Fotografia Przyrodnicza</span>
+        <div class="title-accent"></div>
+      </header>
+
+      <div class="stats-dashboard">
+        <div class="stat-card"><span class="stat-label">Gatunków</span><span class="stat-number">{totalPlants}</span></div>
+        <div class="stat-card"><span class="stat-label">Rodzin</span><span class="stat-number">{uniqueFamiliesCount}</span></div>
+        <div class="stat-card"><span class="stat-label">Chronionych</span><span class="stat-number">{protectedPlantsCount}</span></div>
+      </div>
+
+      
+
+      <div class="filter-section">
+        <span class="filter-legend">Czas kwitnienia</span>
+        <div class="filters">
+          <button class="month-btn active" data-month="all">Cały rok</button>
+          {allMonths.map(m => <button class="month-btn" data-month={m.value}>{m.label}</button>)}
+        </div>
+      </div>
+      
+      <div class="gallery-toolbar">
+        <div class="search-container">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Szukaj rośliny..." autocomplete="off" />
+        </div>
+
+        <div class="icon-legend">
+          <div class="legend-item">
+            <div class="legend-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,22C12,22 13,18 13,15C13,12 12,12 12,12C12,12 11,12 11,15C11,18 12,22 12,22M17,14C17,14 20,15 22,14C24,13 21,11 19,11C17,11 15,12 15,12C15,12 15,13 17,14M7,14C7,14 4,15 2,14C0,13 3,11 5,11C7,11 9,12 9,12C9,12 9,13 7,14M18.5,7C18.5,7 20,4.5 19,3C18,1.5 16,3 15,4.5C14,6 14,8 14,8C14,8 15,8 18.5,7M5.5,7C5.5,7 4,4.5 5,3C6,1.5 8,3 9,4.5C10,6 10,8 10,8C10,8 9,8 5.5,7Z"/>
+              </svg>
+            </div>
+            <span>&ndash; aktualnie kwitnie w naturze</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-container">
+
+        
+
+        {uniqueCategories.map(cat => {
+          const catImages = images.filter(img => img.category === cat);
+          if (catImages.length === 0) return null;
+
+          return (
+            <section class="dashboard-section" id={`section-${cat}`}>
+              <div class="section-header">
+                <h2>{cat} <span class="count-badge">{catImages.length}</span></h2>
+              </div>
+              
+              <div class="gallery-grid expandable-grid" data-cat={cat}>
+                {catImages.map(img => (
+                  <div class="gallery-item" data-category={img.category} data-search={img.caption.toLowerCase()} data-months={img.months ? img.months.join(',') : ''} onclick={`window.openPlant(${img.globalIndex})`}>
+                    <img 
+  
+  src={getOptimizedUrl(img.src, 600)} 
+  
+  
+  srcset={`
+    ${getOptimizedUrl(img.src, 400)} 400w,
+    ${getOptimizedUrl(img.src, 800)} 800w,
+    ${getOptimizedUrl(img.src, 1200)} 1200w
+  `}
+  
+ 
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+  
+  alt={img.title}
+  loading="lazy" 
+  class="gallery-image"
+/>
+                    {img.isFloweringNow && (
+                      <div class="flowering-icon-badge" title="Aktualnie kwitnie">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12,22C12,22 13,18 13,15C13,12 12,12 12,12C12,12 11,12 11,15C11,18 12,22 12,22M17,14C17,14 20,15 22,14C24,13 21,11 19,11C17,11 15,12 15,12C15,12 15,13 17,14M7,14C7,14 4,15 2,14C0,13 3,11 5,11C7,11 9,12 9,12C9,12 9,13 7,14M18.5,7C18.5,7 20,4.5 19,3C18,1.5 16,3 15,4.5C14,6 14,8 14,8C14,8 15,8 18.5,7M5.5,7C5.5,7 4,4.5 5,3C6,1.5 8,3 9,4.5C10,6 10,8 10,8C10,8 9,8 5.5,7Z"/>
+                        </svg>
+                      </div>
+                    )}
+                    <div class="overlay">
+                      <div class="overlay-text">
+                        <span class="caption-pl">{img.caption}</span>
+                        <span class="caption-latina">{img.latina}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {catImages.length > 4 && (
+                <div class="expand-action">
+                  <button class="expand-btn" data-target={cat}>
+                    Zobacz pozostałe {catImages.length - 4} roślin z tej grupy
+                  </button>
+                </div>
+              )}
+            </section>
+          )
+        })}
+      </div>
+      
+      <audio id="forest-audio" loop>
+        <source src="/forestsong.mp3" type="audio/mpeg">
+      </audio>
+
+      <button id="audio-toggle-btn" class="audio-btn" aria-label="Włącz dźwięk lasu" title="Szepty Lasu">
+        <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg class="icon-playing hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+    </main>
+
+    <div id="custom-lightbox" class="hidden">
+      <div class="cl-backdrop" onclick="window.closeLightbox()"></div>
+      <button class="cl-close" onclick="window.closeLightbox()">&times;</button>
+      <button class="cl-nav cl-prev" onclick="window.prevPlant(event)">&#10094;</button>
+      <button class="cl-nav cl-next" onclick="window.nextPlant(event)">&#10095;</button>
+      
+      <div class="cl-container">
+        <div class="cl-image-wrapper" onclick="window.closeLightbox()">
+          <img id="cl-image" class="loading absolute-contain" src="" alt="" onclick="event.stopPropagation()" />
+        </div>
+        <div class="cl-sidebar" id="cl-sidebar" onclick="event.stopPropagation()"></div>
+      </div>
+    </div>
+
+    <script id="gallery-data" type="application/json" set:html={JSON.stringify(galleryData).replace(/</g, '\\u003c')}></script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      main { max-width: 80%; margin: 0 auto; padding: 2rem; font-family: system-ui, sans-serif; background: transparent; min-height: 100vh; }
+      
+      .hero-header { text-align: center; margin-top: 1rem; margin-bottom: 1rem; }
+      .hero-header h1 {
+        font-size: 3.0rem; font-weight: 800; font-family: ui-serif, Georgia, serif; 
+        margin: 0; letter-spacing: -1px;
+        background: linear-gradient(135deg, #0d1a0d 0%, #22c55e 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1;
+      }
+      .hero-subtitle { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 6px; color: #666; margin-top: 1rem; font-weight: 600; }
+      .title-accent { width: 250px; height: 4px; background: #4ade80; margin: 1.5rem auto 0; border-radius: 2px; }
+
+      .stats-dashboard { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+      .stat-card { display: flex; flex-direction: column; align-items: center; padding: 0.5rem; background: white; border: 1px solid #eaeaea; border-radius: 16px; min-width: 130px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+      .stat-number { font-size: 1.0rem; font-weight: 800; color: #1a1a1a; }
+      .stat-label { font-size: 0.6rem; color: #666; text-transform: uppercase; font-weight: 600; }
+
+      .filter-section { margin-bottom: 2rem; text-align: center; }
+      .filter-legend { display: block; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 3px; color: #888; margin-bottom: 1rem; font-weight: 600; }
+      .filters, .month-filters { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+      .month-filters-container { overflow-x: auto; margin-bottom: 2rem; scrollbar-width: none; }
+      
+      .filter-btn, .month-btn { 
+        display: flex; align-items: center; gap: 6px; padding: 0.5rem 0.9rem; border: none; 
+        background: #ffffff; color: #000000; border-radius: 30px; cursor: pointer; 
+        font-weight: 400; letter-spacing: 0.3px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        text-decoration: none;
+      }
+      .filter-btn.active, .month-btn.active { background: #4ade80; color: #000000; font-weight: 500; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
+      .count-badge { font-size: 0.65rem; color: #ffffff; background: #111111; font-weight: 500; padding: 2px 7px; border-radius: 12px; }
+      .filter-btn.active .count-badge { color: #000000; background: #ffffff; }
+
+      .gallery-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; }
+      .search-container { position: relative; display: flex; align-items: center; flex: 1; max-width: 350px; }
+      .search-icon { position: absolute; left: 1rem; width: 18px !important; height: 18px !important; top: 50%; transform: translateY(-50%); color: #888; z-index: 2; pointer-events: none; }
+      .search-input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.5rem; font-size: 1rem; border: 2px solid #e0e0e0; border-radius: 30px; outline: none; transition: 0.3s; background-color: #ffffff !important; color: #000000 !important; }
+      .search-input:focus { border-color: #4ade80 !important; box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.15) !important; }
+      .search-input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #ffffff inset !important; -webkit-text-fill-color: #000000 !important; transition: background-color 5000s; }
+
+      .icon-legend { display: flex; align-items: center; margin: 0; padding: 0; }
+      .legend-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: #bbb; font-style: italic; font-weight: 500; }
+      .legend-icon { width: 24px; height: 24px; color: #4ade80; filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4)); }
+
+      .dashboard-container { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+      .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem; }
+      .section-header h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.1rem; /* Czcionki szeryfowe lubią być nieco większe */
+        font-weight: 400;
+        letter-spacing: 1px; /* Delikatne rozstrzelenie liter */
+        /* Tutaj zostaw swoje reguły kolorów (color: #ffffff !important itd.) z poprzednich kroków! */
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .update-date { font-size: 0.85rem; color: #4ade80; display: flex; align-items: center; gap: 6px; font-weight: 500; letter-spacing: 0.5px; }
+      .highlight-section { background: linear-gradient(180deg, rgba(74, 222, 128, 0.03) 0%, transparent 100%); padding: 2rem; border-radius: 16px; border: 1px solid rgba(74, 222, 128, 0.1); }
+
+      .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%; align-items: start; }
+      .gallery-item { position: relative; overflow: hidden; border-radius: 12px; cursor: pointer; background: #111111; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform-style: preserve-3d; will-change: transform; }
+      
+      .grid-img-botanical { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.8s ease-out, transform 0.6s ease; }
+      .grid-img-botanical.loaded { opacity: 1; }
+      
+      .flowering-icon-badge { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); color: #2d4a2d; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 5px; z-index: 2; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: all 0.3s; }
+      .flowering-icon-badge svg { transform: rotate(-15deg); }
+      .gallery-item:hover .flowering-icon-badge { transform: scale(0) rotate(90deg); opacity: 0; }
+
+      .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); display: flex; align-items: flex-end; padding: 1.5rem; opacity: 0; transition: all 0.4s; pointer-events: none; }
+      .gallery-item:hover .overlay { opacity: 1; }
+      .overlay-text { transform: translateY(10px); transition: transform 0.4s ease; display: flex; flex-direction: column; gap: 4px; }
+      .gallery-item:hover .overlay-text { transform: translateY(0); }
+      .caption-pl { color: #ffffff !important; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+      .caption-latina { color: #4ade80 !important; font-size: 0.9rem; font-style: italic; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+      
+      .gallery-item:hover .grid-img-botanical { transform: scale(1.05); filter: brightness(0.9); }
+      .gallery-item::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2; mix-blend-mode: color-dodge; }
+      .gallery-item:hover::after { opacity: 1; }
+
+      .expandable-grid .gallery-item:nth-child(n+5) { display: none; }
+      .expandable-grid.is-expanded .gallery-item {
+        display: block !important; 
+        animation: fadeIn 0.5s ease forwards;
+      }
+      .expand-action { display: flex; justify-content: center; margin-top: 0.7rem; }
+      .expand-btn { background: transparent; color: #4ade80; border: 1px solid #4ade80; padding: 0.7rem 2rem; font-size: 0.8rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; }
+      .expand-btn:hover { background: #4ade80; color: #000; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+      .audio-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(13, 26, 13, 0.7); backdrop-filter: blur(8px); border: 1px solid #2d4a2d; color: #e0e0e0; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+      .audio-btn svg { width: 24px; height: 24px; }
+      .audio-btn .hidden { display: none; }
+      .audio-btn:hover { background: rgba(34, 197, 94, 0.2); border-color: #4ade80; color: #4ade80; transform: translateY(-3px); }
+      .audio-btn.is-playing { background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: #4ade80; animation: audio-pulse 3s infinite cubic-bezier(0.66, 0, 0, 1); }
+      @keyframes audio-pulse { 0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(74, 222, 128, 0); } 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); } }
+
+      body { transition: background-color 2s ease; }
+      .hero-header h1, .title-accent, .gallery-item { transition: all 1.5s ease; }
+      body.theme-morning { background-color: #101513; }
+      body.theme-morning .hero-header h1 { background: linear-gradient(135deg, #1a2b25 0%, #7ee8fa 100%); -webkit-background-clip: text; }
+      body.theme-morning .title-accent { background: #5eead4; }
+      body.theme-golden { background-color: #17130e; }
+      body.theme-golden .hero-header h1 { background: linear-gradient(135deg, #422006 0%, #fbbf24 100%); -webkit-background-clip: text; }
+      body.theme-golden .title-accent { background: #f59e0b; }
+      body.theme-golden .gallery-item { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08); }
+      body.theme-night { background-color: #08090a; }
+      body.theme-night .hero-header h1 { background: linear-gradient(135deg, #0f172a 0%, #94a3b8 100%); -webkit-background-clip: text; }
+      body.theme-night .title-accent { background: #64748b; }
+
+      @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 650px) {
+        .gallery-grid { grid-template-columns: 1fr; }
+        .gallery-toolbar { flex-direction: column-reverse; align-items: center; gap: 1rem; }
+        .search-container { max-width: 100%; }
+        .audio-btn { bottom: 20px; right: 20px; }
+      }
+      @media (max-height: 800px), (max-width: 1400px) {
+        .hero-header { margin-top: 0.5rem; margin-bottom: 1.5rem; }
+        .hero-header h1 { font-size: 2.8rem; }
+        .filter-section { margin-bottom: 1rem; }
+      }
+      /* --- KONTRAST LICZNIKA W NAGŁÓWKU SEKCJI --- */
+      .section-header h2 .count-badge {
+        background-color: #ffffff !important; /* Czyste białe tło */
+        color: #000000 !important; /* Twardy, czarny tekst */
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Elegancki cień, żeby pigułka "odkleiła się" od tła */
+        padding: 4px 10px;
+        margin-left: 8px;
+        font-size: 1rem;
+        vertical-align: middle;
+      }
+      /* --- TRYB MUZEUM (EFEKT SPOTLIGHT) --- */
+      
+      /* 1. Płynne przejścia dla wszystkich zdjęć */
+      .gallery-item {
+        transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease;
+        border-radius: 12px; /* Żeby poświata idealnie przylegała do krawędzi */
+        position: relative;
+      }
+
+      /* 2. Kiedy Tryb Muzeum jest WŁĄCZONY, domyślnie "gasimy" wszystkie kafelki */
+      .dashboard-container.museum-mode .gallery-item {
+        filter: grayscale(100%) brightness(0.3); /* Robimy je czarno-białe i bardzo ciemne */
+        opacity: 0.5;
+        transform: scale(0.96); /* Delikatnie odsuwamy w tył */
+        pointer-events: none; /* Blokujemy klikanie w zgaszone eksponaty */
+      }
+
+      /* 3. "Zapalenie" pasujących roślin (Spotlight) */
+      .dashboard-container.museum-mode .gallery-item.spotlight {
+        filter: grayscale(0%) brightness(1.1); /* Przywracamy pełne, podbite kolory */
+        opacity: 1;
+        transform: scale(1.02); /* Wysuwamy lekko do przodu */
+        box-shadow: 0 0 40px rgba(74, 222, 128, 0.25); /* Ekskluzywna zielona poświata */
+        border: 1px solid rgba(74, 222, 128, 0.4); /* Subtelna, ostra ramka dla kontrastu */
+        z-index: 2; /* Wynosimy nad zgaszone zdjęcia */
+        pointer-events: auto; /* Zezwalamy na klikanie */
+      }
+     /* --- KOLOR NAZWY GRUPY W ZALEŻNOŚCI OD PORY DNIA --- */
+      /* Domyślnie: biały tekst dla ciemnych teł (Poranek, Złota Godzina, Noc) */
+      .section-header h2 {
+        color: #ffffff !important; 
+      }
+
+      /* Tylko w pełny dzień (9:00 - 17:00) zmieniamy tekst na czarny */
+      body.theme-day .section-header h2 {
+        color: #000000 !important;
+      }
+    </style>
+
+    <style is:global>
+      body.lightbox-open { overflow: hidden; }
+      #custom-lightbox { position: fixed; inset: 0; z-index: 99999; display: flex; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+      #custom-lightbox:not(.hidden) { opacity: 1; pointer-events: auto; }
+      .cl-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.95); }
+      .cl-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: #fff; font-size: 2.5rem; cursor: pointer; z-index: 10; opacity: 0.6; transition: 0.2s; }
+      .cl-close:hover { opacity: 1; transform: scale(1.1); }
+      .cl-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: 1px solid rgba(255,255,255,0.1); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 10; transition: 0.2s; }
+      .cl-prev { left: 30px; }
+      .cl-next { right: calc(360px + 30px); }
+      .cl-container { position: absolute; inset: 0; display: flex; width: 100%; height: 100%; overflow: hidden; }
+      .cl-image-wrapper { position: relative; flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; }
+      .absolute-contain { max-width: 90%; max-height: 85%; object-fit: contain !important; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); transition: opacity 0.3s; }
+      .absolute-contain.loading { opacity: 0; }
+      .cl-sidebar { width: 360px; height: 100%; overflow-y: auto; color: #fff; background: #050505; padding: 2rem; border-left: 1px solid #222; box-sizing: border-box; }
+
+      @media (max-width: 900px) {
+        .cl-container { flex-direction: column; }
+        .cl-image-wrapper { height: 50vh; }
+        .cl-sidebar { width: 100%; height: 50vh; border-left: none; border-top: 1px solid #222; }
+        .cl-next { right: 20px; }
+      }
+    </style>
+
+<script>
+  const rawData = document.getElementById('gallery-data').textContent;
+  const allPlantsData = JSON.parse(rawData);
+
+  const lightbox = document.getElementById('custom-lightbox');
+  const clImage = document.getElementById('cl-image') as HTMLImageElement;
+  const clSidebar = document.getElementById('cl-sidebar');
+  let currentIndex = -1;
+
+  // --- 1. LIGHTBOX ---
+  function generateSidebarHTML(plant) {
+    let relatedHTML = '';
+    if (plant.relatedData && plant.relatedData.length > 0) {
+      relatedHTML = `
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed #444;">
+          <p style="font-size: 0.75rem; text-transform: uppercase; color: #888; margin-bottom: 0.8rem;">Inne z rodziny ${plant.family}:</p>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            ${plant.relatedData.map(rel => `
+              <button onclick="window.openPlant(${rel.index})" style="background:transparent; border:none; padding:0; text-align:left; color:#4ade80; font-size:0.9rem; display:flex; align-items:center; gap:12px; cursor:pointer; width:100%;">
+                <img src="${rel.thumb}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px;">
+                <span>${rel.title}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+    return `
+    <br>
+    <h2 style="margin: 0 0 0.2rem 0; font-size: 1.6rem; color: #ffffff;">${plant.caption}</h2>
+      <em style="color: #888; font-size: 1rem; display: block; margin-bottom: 1.5rem;">${plant.latina}</em>
+      <div style="font-size: 0.9rem; line-height: 1.4;">
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Rodzina:</strong> ${plant.family}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Kwitnienie:</strong> ${plant.flowering}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Występowanie:</strong> ${plant.habitat}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Siedlisko:</strong> ${plant.occurrence}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Ochrona:</strong> ${plant.protection}</p>
+      </div>
+      <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
+      <p style="line-height: 1.6; color: #ddd; font-style: italic;">${plant.description}</p>
+      ${relatedHTML}`;
+  }
+
+  window.openPlant = (index) => {
+  const plant = allPlantsData[index];
+  
+  const fastUrl = getOptimizedUrl(plant.src, 800);
+  const highResUrl = getOptimizedUrl(plant.src, 1200);
+
+  // Najpierw pokazujemy szybko wersję 800px
+  clImage.src = fastUrl;
+
+  // Pobieramy wysoką rozdzielczość w tle
+  const heavyImage = new Image();
+  heavyImage.src = highResUrl;
+  heavyImage.onload = () => {
+    clImage.src = highResUrl; // Podmiana na żyletę
+  };
+};
+
+  window.closeLightbox = () => {
+    lightbox.classList.add('hidden');
+    document.body.classList.remove('lightbox-open');
+    setTimeout(() => { clImage.src = ''; }, 300);
+  };
+
+  window.prevPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex > 0 ? currentIndex - 1 : allPlantsData.length - 1); };
+  window.nextPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex < allPlantsData.length - 1 ? currentIndex + 1 : 0); };
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('hidden')) {
+      if (e.key === "Escape") window.closeLightbox();
+      if (e.key === "ArrowLeft") window.prevPlant();
+      if (e.key === "ArrowRight") window.nextPlant();
+    }
+  });
+
+  // --- 2. WYSZUKIWARKA TEKSTOWA ---
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+      let currentSearch = '';
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => { 
+          currentSearch = (e.target as HTMLInputElement).value.toLowerCase().trim(); 
+          
+          document.querySelectorAll('.dashboard-section').forEach((section: HTMLElement) => {
+            
+            // 1. Identyfikujemy, czy to sekcja nowości (używamy klasy highlight-section lub ID)
+            const isRecentSection = section.classList.contains('highlight-section') || section.id === 'recent-section';
+
+            // 2. Jeśli szukamy, ukrywamy "Ostatnio dodane" i pomijamy resztę kodu dla tej sekcji
+            if (currentSearch !== '' && isRecentSection) {
+              section.style.display = 'none';
+              return; 
+            }
+
+            // 3. Normalne filtrowanie dla pozostałych kategorii
+            let visibleInThisSection = 0;
+            const items = section.querySelectorAll('.gallery-item');
+            
+            items.forEach((item: HTMLElement) => {
+              const itemSearch = (item.getAttribute('data-search') || '').toLowerCase();
+              
+              if (currentSearch === '') {
+                item.style.removeProperty('display'); // Reset do ustawień CSS
+                visibleInThisSection++;
+              } else {
+                if (itemSearch.includes(currentSearch)) {
+                  item.style.setProperty('display', 'block', 'important');
+                  visibleInThisSection++;
+                } else {
+                  item.style.setProperty('display', 'none', 'important');
+                }
+              }
+            });
+
+            // 4. Logika rozwijania/ukrywania całych sekcji
+            if (!isRecentSection) {
+              const grid = section.querySelector('.expandable-grid');
+              const expandBtn = section.querySelector('.expand-action') as HTMLElement;
+              
+              if (currentSearch !== '') {
+                grid?.classList.add('is-expanded');
+                if(expandBtn) expandBtn.style.display = 'none';
+                section.style.display = (visibleInThisSection > 0) ? 'block' : 'none';
+              } else {
+                grid?.classList.remove('is-expanded');
+                if(expandBtn) expandBtn.style.display = 'flex';
+                section.style.display = items.length > 0 ? 'block' : 'none';
+              }
+            } else {
+              // Przywracamy "Ostatnio dodane", gdy wyszukiwarka jest znowu pusta
+              if (currentSearch === '') {
+                section.style.display = 'block';
+              }
+            }
+          });
+        });
+      }
+
+  // --- 3. PRZYCISKI "ZOBACZ POZOSTAŁE" ---
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const targetCat = (e.target as HTMLElement).getAttribute('data-target');
+      const grid = document.querySelector(`.expandable-grid[data-cat="${targetCat}"]`);
+      if (grid) {
+        grid.classList.add('is-expanded');
+        (e.target as HTMLElement).closest('.expand-action')?.setAttribute('style', 'display: none !important');
+      }
+    });
+  });
+
+  // --- 4. TRYB MUZEUM (MIESIĄCE) ---
+  const dashboard = document.querySelector('.dashboard-container');
+  const monthBtns = document.querySelectorAll('.month-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  monthBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      monthBtns.forEach(b => b.classList.remove('active'));
+      const currentBtn = e.currentTarget as HTMLElement;
+      currentBtn.classList.add('active');
+
+      const selectedMonth = currentBtn.getAttribute('data-month');
+
+      if (selectedMonth === 'all') {
+        if (dashboard) dashboard.classList.remove('museum-mode');
+        galleryItems.forEach((item: HTMLElement) => {
+          item.classList.remove('spotlight');
+        });
+        return;
+      }
+
+      if (dashboard) dashboard.classList.add('museum-mode');
+      
+      galleryItems.forEach((item: HTMLElement) => {
+        const itemMonths = (item.getAttribute('data-months') || '').split(',').map(m => m.trim());
+        if (itemMonths.includes(selectedMonth)) {
+          item.classList.add('spotlight');
+        } else {
+          item.classList.remove('spotlight');
+        }
+      });
+    });
+  });
+
+  // --- 5. EFEKTY WIZUALNE I AUDIO (WIATR) ---
+  let scrollVelocity = 0;
+  let lastScrollPos = window.scrollY;
+  let windTimeout;
+  
+  window.addEventListener('scroll', () => {
+    scrollVelocity = window.scrollY - lastScrollPos;
+    lastScrollPos = window.scrollY;
+    let windForce = Math.max(-5, Math.min(5, scrollVelocity * 0.15));
+    
+    const items = document.querySelectorAll('.gallery-item');
+    items.forEach((item: HTMLElement) => {
+      item.style.transition = 'none';
+      item.style.transform = `perspective(1000px) rotateX(${windForce * 1.5}deg) translateY(${windForce}px)`;
+    });
+    
+    clearTimeout(windTimeout);
+    windTimeout = setTimeout(() => {
+      items.forEach((item: HTMLElement) => {
+        item.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
+        item.style.transform = `perspective(1000px) rotateX(0deg) translateY(0deg)`;
+      });
+    }, 150);
+  });
+
+  const audioBtn = document.getElementById('audio-toggle-btn');
+  const forestAudio = document.getElementById('forest-audio') as HTMLAudioElement;
+  
+  if (audioBtn && forestAudio) {
+    forestAudio.volume = 0.6;
+    const iconMuted = audioBtn.querySelector('.icon-muted');
+    const iconPlaying = audioBtn.querySelector('.icon-playing');
+
+    audioBtn.addEventListener('click', () => {
+      if (forestAudio.paused) {
+        forestAudio.play().then(() => {
+          audioBtn.classList.add('is-playing');
+          iconMuted?.classList.add('hidden');
+          iconPlaying?.classList.remove('hidden');
+        }).catch(e => console.error(e));
+      } else {
+        forestAudio.pause();
+        audioBtn.classList.remove('is-playing');
+        iconPlaying?.classList.add('hidden');
+        iconMuted?.classList.remove('hidden');
+      }
+    });
+  }
+
+  // --- 6. MYSZ (ŚWIATŁO NA KAFELKU) ---
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = (item as HTMLElement).getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      (item as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+      (item as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+    });
+  });
+
+  // --- 7. MOTYW CZASOWY ---
+  function applyTimeTheme() {
+    const currentHour = new Date().getHours();
+    const body = document.body;
+    body.classList.remove('theme-morning', 'theme-day', 'theme-golden', 'theme-night');
+
+    if (currentHour >= 5 && currentHour < 8) body.classList.add('theme-morning');
+    else if (currentHour >= 8 && currentHour < 17) body.classList.add('theme-day');
+    else if (currentHour >= 17 && currentHour < 20) body.classList.add('theme-golden');
+    else body.classList.add('theme-night');
+  }
+  function getOptimizedUrl(fullUrl, width) {
+  if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
+  
+  // Rozcinamy link po słowie "upload/"
+  const parts = fullUrl.split('upload/');
+  
+  // Wstrzykujemy parametry: w_szerokość oraz c_scale (skalowanie)
+  // Cloudinary połączy to z Twoimi f_auto, q_auto w linku
+  return `${parts[0]}upload/w_${width},c_scale/${parts[1]}`;
+}
+  applyTimeTheme();
+  setInterval(applyTimeTheme, 60000);
+</script>
+  </body>
+</html>

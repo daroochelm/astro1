@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776748547/glowienka_pospolita_hsjwu6.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776748547/glowienka_pospolita_hsjwu6.jpg",
+    "caption": "Głowienka pospolita",
+    "latina": "(Prunella vulgaris L.)",
+    "family": "jasnotowate",
+    "flowering": "Maj-październik",
+	"months": [5, 6, 7, 8, 9, 10],
+    "habitat": "Jest szeroko rozprzestrzeniona na półkuli północnej. Występuje w Afryce Północnej, Europie, Ameryce Północnej i w Azji.",
+    "occurrence": "Przydroża, łąki, obrzeża lasów.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Młode liście i pędy można gotować lub dodawać na surowo do sałatek.",
+    "category": "Jasnotowce",
+    "id": 16
+}

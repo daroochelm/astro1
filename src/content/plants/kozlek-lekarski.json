@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776710316/kozlek_lekarski_chknjw.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776710316/kozlek_lekarski_chknjw.jpg",
+    "caption": "Kozłek lekarski",
+    "latina": "(Valeriana officinalis)",
+    "family": "kozłkowate",
+    "flowering": "Czerwiec-sierpień",
+	"months": [6, 7, 8],
+    "habitat": "Występuje w całej Eurazji z wyjątkiem stref arktycznych i pustynnych. W Polsce pospolity.",
+    "occurrence": "Brzegi wód, mokre łąki, torfowiska niskie, wilgotne lasy (głównie łęgi olszowe), czasami spotykany w formie skarlałej w miejscach suchych. ",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Zapach waleriany działa na koty niczym feromony, wywołując euforię, turlanie się i zabawę, podobnie jak kocimiętka.",
+    "category": "Szczeciowce",
+    "id": 51
+}

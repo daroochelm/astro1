@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1776401900/zarnowiec_miotlasty_bqfeia.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/w_100,c_scale,f_auto,q_auto/v1776401900/zarnowiec_miotlasty_bqfeia.jpg",
+    "caption": "Żarnowiec miotlasty",
+    "latina": "(Cytisus scoparius)",
+    "family": "bobowate",
+    "flowering": "Maj-czerwiec",
+	"months": [5, 6],
+    "habitat": "Występuje w południowej i środkowej Europie, także w Polsce (pas nadmorski, zachodnia część niżu i pogórze).",
+    "occurrence": "Rośnie na piaszczystych i suchych zboczach, odłogach, porębach, wrzosowiskach, skrajach borów sosnowych.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Świetnie radzi sobie na słabych, piaszczystych i kwaśnych glebach, dlatego jest sadzony w celu umacniania wydm nadmorskich.",
+    "category": "Bobowce",
+    "id": 62
+}
