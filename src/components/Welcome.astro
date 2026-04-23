@@ -79,15 +79,12 @@ const galleryData = images.map((image) => {
 });
 // Wstrzykuje nowy rozmiar jako dodatkowy "krok" w linku Cloudinary
 function getOptimizedUrl(fullUrl, width) {
-  if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
-  
-  // Rozcinamy link w miejscu "upload/"
-  const parts = fullUrl.split('upload/');
-  
-  // Wstrzykujemy nowy rozmiar z ukośnikiem (np. "w_400,c_scale/")
-  // Wynik będzie wyglądał tak: .../upload/w_400,c_scale/f_auto,q_auto/...
-  return `${parts[0]}upload/w_${width},c_scale/${parts[1]}`;
-}
+        if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
+        const parts = fullUrl.split('upload/');
+        
+        // Zmieniliśmy q_auto na q_auto:good
+        return `${parts[0]}upload/w_${width},c_scale,f_auto,q_auto:good/${parts[1]}`;
+      }
 ---
 
 <html lang="pl">
@@ -159,23 +156,18 @@ function getOptimizedUrl(fullUrl, width) {
                 {catImages.map(img => (
                   <div class="gallery-item" data-category={img.category} data-search={img.caption.toLowerCase()} data-months={img.months ? img.months.join(',') : ''} onclick={`window.openPlant(${img.globalIndex})`}>
                     <img 
-  
-  src={getOptimizedUrl(img.src, 600)} 
-  
-  
-  srcset={`
-    ${getOptimizedUrl(img.src, 400)} 400w,
-    ${getOptimizedUrl(img.src, 800)} 800w,
-    ${getOptimizedUrl(img.src, 1200)} 1200w
-  `}
-  
- 
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-  
-  alt={img.title}
-  loading="lazy" 
-  class="gallery-image"
-/>
+                      src={getOptimizedUrl(img.src, 600)} 
+                      srcset={`
+                        ${getOptimizedUrl(img.src, 400)} 400w,
+                        ${getOptimizedUrl(img.src, 600)} 600w,
+                        ${getOptimizedUrl(img.src, 900)} 900w,
+                        ${getOptimizedUrl(img.src, 1200)} 1200w
+                      `}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      alt={img.caption}
+                      loading="lazy"
+                      class="gallery-image"
+                    />
                     {img.isFloweringNow && (
                       <div class="flowering-icon-badge" title="Aktualnie kwitnie">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
