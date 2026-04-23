@@ -478,21 +478,17 @@ function getOptimizedUrl(fullUrl, width) {
   }
 
   window.openPlant = (index) => {
-  const plant = allPlantsData[index];
-  
-  const fastUrl = getOptimizedUrl(plant.src, 800);
-  const highResUrl = getOptimizedUrl(plant.src, 1200);
-
-  // Najpierw pokazujemy szybko wersję 800px
-  clImage.src = fastUrl;
-
-  // Pobieramy wysoką rozdzielczość w tle
-  const heavyImage = new Image();
-  heavyImage.src = highResUrl;
-  heavyImage.onload = () => {
-    clImage.src = highResUrl; // Podmiana na żyletę
+    currentIndex = index;
+    const plant = allPlantsData[index];
+    clImage.classList.add('loading');
+    setTimeout(() => {
+      clImage.src = plant.src;
+      clSidebar.innerHTML = generateSidebarHTML(plant);
+      clImage.onload = () => clImage.classList.remove('loading');
+    }, 150);
+    lightbox.classList.remove('hidden');
+    document.body.classList.add('lightbox-open');
   };
-};
 
   window.closeLightbox = () => {
     lightbox.classList.add('hidden');
@@ -691,16 +687,7 @@ function getOptimizedUrl(fullUrl, width) {
     else if (currentHour >= 17 && currentHour < 20) body.classList.add('theme-golden');
     else body.classList.add('theme-night');
   }
-  function getOptimizedUrl(fullUrl, width) {
-  if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
-  
-  // Rozcinamy link po słowie "upload/"
-  const parts = fullUrl.split('upload/');
-  
-  // Wstrzykujemy parametry: w_szerokość oraz c_scale (skalowanie)
-  // Cloudinary połączy to z Twoimi f_auto, q_auto w linku
-  return `${parts[0]}upload/w_${width},c_scale/${parts[1]}`;
-}
+
   applyTimeTheme();
   setInterval(applyTimeTheme, 60000);
 </script>
