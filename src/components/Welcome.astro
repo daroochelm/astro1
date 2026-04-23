@@ -93,7 +93,12 @@ function getOptimizedUrl(fullUrl, width) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=Montserrat:wght@200;300;400;500&display=swap" media="print" onload="this.media='all'">
+    
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=Montserrat:wght@200;300;400;500&display=swap">
+    </noscript>
     <title>Galeria Botaniczna | Autorska Fotografia Przyrodnicza</title>
   </head>
   <body>
@@ -274,25 +279,35 @@ function getOptimizedUrl(fullUrl, width) {
       .legend-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: #bbb; font-style: italic; font-weight: 500; }
       .legend-icon { width: 24px; height: 24px; color: #4ade80; filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4)); }
 
-      .dashboard-container { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
-      .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem; }
-      .section-header h2 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 2.1rem; /* Czcionki szeryfowe lubią być nieco większe */
-        font-weight: 400;
-        letter-spacing: 1px; /* Delikatne rozstrzelenie liter */
-        /* Tutaj zostaw swoje reguły kolorów (color: #ffffff !important itd.) z poprzednich kroków! */
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
+      .dashboard-section { margin-bottom: 4rem; }
+      .section-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #222; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+      .section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin: 0; color: var(--accent-color); }
+      .section-header .count { color: #666; font-size: 1rem; font-family: 'Montserrat', sans-serif; }
       .update-date { font-size: 0.85rem; color: #4ade80; display: flex; align-items: center; gap: 6px; font-weight: 500; letter-spacing: 0.5px; }
       .highlight-section { background: linear-gradient(180deg, rgba(74, 222, 128, 0.03) 0%, transparent 100%); padding: 2rem; border-radius: 16px; border: 1px solid rgba(74, 222, 128, 0.1); }
 
-      .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%; align-items: start; }
-      .gallery-item { position: relative; overflow: hidden; border-radius: 12px; cursor: pointer; background: #111111; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform-style: preserve-3d; will-change: transform; }
+      .gallery-grid { 
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem;
+        /* KLUCZ: Zdjęcia równają się do góry i nie są sztucznie rozciągane w pionie */
+        align-items: start; 
+      }
+      .gallery-item { 
+        position: relative; 
+        border-radius: 12px; 
+        overflow: hidden; 
+        cursor: pointer; 
+        background: #1a1a1a; 
+      }
+      .gallery-image { 
+        width: 100%; 
+        height: auto; /* Zdjęcie wymusza swoją naturalną wysokość */
+        display: block; 
+        transition: transform 0.5s ease; 
+      }
       
+      .gallery-item:hover .gallery-image { transform: scale(1.05); }
       .grid-img-botanical { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.8s ease-out, transform 0.6s ease; }
       .grid-img-botanical.loaded { opacity: 1; }
       
@@ -311,14 +326,13 @@ function getOptimizedUrl(fullUrl, width) {
       .gallery-item::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2; mix-blend-mode: color-dodge; }
       .gallery-item:hover::after { opacity: 1; }
 
-      .expandable-grid .gallery-item:nth-child(n+5) { display: none; }
-      .expandable-grid.is-expanded .gallery-item {
-        display: block !important; 
-        animation: fadeIn 0.5s ease forwards;
+      .expandable-grid:not(.expanded) .gallery-item:nth-child(n+5) { display: none !important; }
+
+      .expand-btn { 
+        display: block; margin: 2rem auto 0; background: transparent; border: 1px solid #555; 
+        color: #aaa; padding: 10px 24px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;
       }
-      .expand-action { display: flex; justify-content: center; margin-top: 0.7rem; }
-      .expand-btn { background: transparent; color: #4ade80; border: 1px solid #4ade80; padding: 0.7rem 2rem; font-size: 0.8rem; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; }
-      .expand-btn:hover { background: #4ade80; color: #000; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
+      .expand-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
       .audio-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(13, 26, 13, 0.7); backdrop-filter: blur(8px); border: 1px solid #2d4a2d; color: #e0e0e0; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
@@ -682,6 +696,33 @@ function getOptimizedUrl(fullUrl, width) {
 
   applyTimeTheme();
   setInterval(applyTimeTheme, 60000);
+  // --- LOGIKA PRZYCISKÓW "POKAŻ POZOSTAŁE" ---
+  document.querySelectorAll('.dashboard-section').forEach(section => {
+        // Szukamy siatki i przycisku wewnątrz każdej kategorii
+        const grid = section.querySelector('.expandable-grid');
+        const btn = section.querySelector('.expand-btn'); 
+
+        if (grid && btn) {
+          // Liczymy, ile jest wszystkich zdjęć w tej kategorii
+          const totalItems = grid.querySelectorAll('.gallery-item').length;
+
+          // Podpinamy akcję kliknięcia
+          btn.addEventListener('click', (e) => {
+            e.preventDefault(); // Zapobiega przeładowaniu/skakaniu strony
+            
+            // Magiczna funkcja toggle - dodaje klasę 'expanded', jeśli jej nie ma, i usuwa, jeśli jest
+            const isExpanded = grid.classList.toggle('expanded');
+            
+            if (isExpanded) {
+              btn.innerHTML = 'Zwiń &uarr;';
+            } else {
+              btn.innerHTML = `Pokaż pozostałe (${totalItems})`;
+              // Gładki powrót do tytułu kategorii po zwinięciu siatki
+              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        }
+      });
 </script>
   </body>
 </html>
