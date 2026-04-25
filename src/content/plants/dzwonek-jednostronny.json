@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122265/dzwonek_jednostronny_e76fr8.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122265/dzwonek_jednostronny_e76fr8.jpg",
     "caption": "Dzwonek jednostronny",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Campanula rapunculoides L.)",
+    "family": "dzwonkowate",
+    "flowering": "Czerwiec-wrzesień",
+    "months": [6, 7, 8, 9],
+    "habitat": "Występuje w Europie i Azji w strefie umiarkowanej. W Polsce jest pospolity.",
+    "occurrence": "Rośnie w miejscach trawiastych i kamienistych, na przydrożach i innych miejscach ruderalnych, na miedzach, w murawach, zaroślach, na skrajach lasów, czasem także na polach uprawnych jako chwast.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Jest w pełni mrozoodporny w Polsce (strefy mrozoodporności 4–10) i może rosnąć na jednym stanowisku przez wiele lat, stanowiąc pożytek dla pszczół.",
+    "category": "Astrowce",
+    "id": "108"
 
 }
