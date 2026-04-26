@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/miesiacznica_trwala_s5dush.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/miesiacznica_trwala_s5dush.jpg",
     "caption": "Miesiącznica trwała",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Lunaria rediviva L.)",
+    "family": "kapustowate",
+    "flowering": "Kwiecień-czerwiec",
+    "months": [4, 5, 6],
+    "habitat": "Występuje w Europie na obszarze od Hiszpanii po zachodnią Rosję i od Szwecji na północy po Włochy, Albanię i Bułgarię na południu.",
+    "occurrence": "Cieniste lasy, wąwozy, zbocza o północnej i zachodniej ekspozycji, podnóża skał, skraje rumowisk i osypisk.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Owocostany są cenione w suchych bukietach. Po zaschnięciu łuszczyna odsłania perłową, przezroczystą przegrodę, która wygląda jak moneta.",
+    "category": "Kapustowce",
+    "id": "113"
 
 }

@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122265/naparstnica_purpurowa_gjkcvc.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122265/naparstnica_purpurowa_gjkcvc.jpg",
     "caption": "Naparstnica purpurowa",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Digitalis purpurea L.)",
+    "family": "babkowate",
+    "flowering": "Czerwiec-sierpień",
+    "months": [6, 7, 8],
+    "habitat": "Występuje dziko w zachodniej Europie (wraz z Półwyspem Iberyjskim) i środkowej, poza tym w północnej Afryce. ",
+    "occurrence": "Rośnie głównie w świetlistych lasach, w wolnych przestrzeniach kosodrzewiny, na porębach leśnych, na obrzeżach lasów, w ziołoroślach górskich.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Ze względu na głęboki kształt kwiatów, ich głównymi zapylaczami są trzmiele, które bez trudu wchodzą do środka w poszukiwaniu nektaru.",
+    "category": "Jasnotowce",
+    "id": "121"
 
 }

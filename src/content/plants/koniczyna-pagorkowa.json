@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122266/koniczyna_pagorkowa_bihe1j.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122266/koniczyna_pagorkowa_bihe1j.jpg",
     "caption": "Koniczyna pagórkowa",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Trifolium montanum L.)",
+    "family": "bobowate",
+    "flowering": "Czerwiec-sierpień",
+    "months": [6, 7, 8],
+    "habitat": "Występuje w Azji i Europie. W Polsce gatunek średnio pospolity.",
+    "occurrence": "Porasta trawiaste zbocza, murawy, świetliste lasy i zarośla, przydroża, łąki. W górach występuje po piętro kosówki.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Posiada zdrewniałe, silne kłącze, dzięki któremu dobrze znosi suszę i trudne warunki gruntowe.",
+    "category": "Bobowce",
+    "id": "109"
 
 }

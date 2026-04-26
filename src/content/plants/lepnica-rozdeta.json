@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/lepnica_rozdeta_hhudyt.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/lepnica_rozdeta_hhudyt.jpg",
     "caption": "Lepnica rozdęta",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Silene vulgaris (Salisb.) Sm.)",
+    "family": "goździkowate",
+    "flowering": "Maj-wrzesień",
+    "months": [5, 6, 7, 8, 9],
+    "habitat": "Jest szeroko rozprzestrzeniony na półkuli północnej, rośnie dziko w Europie, Azji i północnej Afryce.",
+    "occurrence": "Suche murawy, żwirowiska, skarpy, przydroża, ubogie darnie, nasypy z kruszywa kamiennego, płytkie wapienne gleby.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Roślina jest pokryta warstwą wosku, co nadaje jej charakterystyczny, sinoniebieski odcień.",
+    "category": "Goździkowce",
+    "id": "111"
 
 }

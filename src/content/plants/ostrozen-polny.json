@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122266/ostrozen_polny_pn4n9c.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122266/ostrozen_polny_pn4n9c.jpg",
     "caption": "Ostrożen polny",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Cirsium arvense (L.) Scop.)",
+    "family": "astrowate",
+    "flowering": "Lipiec-październik",
+    "months": [7, 8, 9, 10],
+    "habitat": "Rodzimy obszar jego występowania to cała niemal Europa i znaczna część Azji. W Polsce jest bardzo pospolity na całym obszarze.",
+    "occurrence": "Roślina synantropijna, rosnąca głównie na siedliskach ruderalnych i segetalnych; na ścierniskach, w ogrodach, na łąkach, pastwiskach i trawnikach, na nieużytkach, terenach kolejowych, wysypiskach, poboczach dróg, w rowach, nad rzekami.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Nawet mały fragment korzenia pozostawiony w ziemi potrafi wydać nową, pełnoprawną roślinę. Roślina osiąga zazwyczaj od 50 do 150 cm wysokości, ale w korzystnych warunkach może dorosnąć nawet do 180 cm.",
+    "category": "Astrowce",
+    "id": "122"
 
 }

@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122265/nawloc_pozna_wez5d8.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122265/nawloc_pozna_wez5d8.jpg",
     "caption": "Nawłoć późna",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Solidago gigantea Aiton)",
+    "family": "astrowate",
+    "flowering": "Sierpień-wrzesień",
+    "months": [8, 9],
+    "habitat": "Występuje naturalnie w Ameryce Północnej. Rozpowszechniony został jako roślina ozdobna i stał się gatunkiem inwazyjnym na znacznym obszarze Europy, ale też na innych kontynentach. Jest pospolity na obszarze całej Polski.",
+    "occurrence": "W obrębie naturalnego zasięgu nawłoć późna związana jest z siedliskami przynajmniej okresowo wilgotnymi – rośnie na terenach zalewowych w dolinach rzek, wzdłuż rowów i w obniżeniach terenu, na mokradłach i źródliskach, zarówno w zbiorowiskach trawiastych (w tym typowych dla prerii), jak i w zaroślach oraz widnych lasach.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
+    "description": "W Polsce zadomowiła się na dobre od ok. 1853 roku, uciekając z ogrodów i błyskawicznie kolonizując nieużytki, przydroża i łąki.",
+    "category": "Astrowce",
     "id": ""
 
 }

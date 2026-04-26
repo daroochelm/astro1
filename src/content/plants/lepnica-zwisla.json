@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/lepnica_zwisla_pangyk.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/lepnica_zwisla_pangyk.jpg",
     "caption": "Lepnica zwisła",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Silene nutans L.)",
+    "family": "goździkowate",
+    "flowering": "Czerwiec-sierpień",
+    "months": [6, 7, 8],
+    "habitat": "Występuje w całej Europie. W Polsce na całym obszarze.",
+    "occurrence": "Rośnie na ubogich murawach, widnych pagórkach i w widnych lasach, zwłaszcza dębowych. Preferuje miejsca słoneczne.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Górna część łodygi jest pokryta lepkimi gruczołkami. Wydzielana substancja uniemożliwia małym, pełzającym owadom (np. mrówkom) dostanie się do nektaru, chroniąc go dla zapylaczy.",
+    "category": "Goździkowce",
+    "id": "112"
 
 }

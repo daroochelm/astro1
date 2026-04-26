@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/mlecz_kolczasty_hyoung.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/mlecz_kolczasty_hyoung.jpg",
     "caption": "Mlecz kolczasty",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Sonchus asper)",
+    "family": "astrowate",
+    "flowering": "Czerwiec-październik",
+    "months": [6, 7, 8, 9, 10],
+    "habitat": "Rodzimy obszar jego występowania obejmuje Europę i dużą część Azji i Afryki. W Polsce jest pospolity na niżu, także w górach.",
+    "occurrence": "Porasta ogrody, pola, wysypiska, drogi, nieużytki, żyzne gleby, bogate w azot.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Młode liście można jeść na surowo w sałatkach (mogą być lekko gorzkie) lub gotować jak szpinak. Są źródłem magnezu.",
+    "category": "Astrowce",
+    "id": "114"
 
 }

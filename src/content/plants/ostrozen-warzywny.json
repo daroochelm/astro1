@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122266/ostrozen_warzywny_o9rmnm.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122266/ostrozen_warzywny_o9rmnm.jpg",
     "caption": "Ostrożen warzywny",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Cirsium oleraceum (L.) Scop.)",
+    "family": "astrowate",
+    "flowering": "Lipiec-wrzesień",
+    "months": [7, 8, 9],
+    "habitat": "Występuje w dużej części Europy (z wyjątkiem zachodnich i południowych krańców) a także w zachodniej Syberii i w Kazachstanie. W Polsce gatunek rodzimy, pospolity na całym niżu i w niższych położeniach górskich (do regla dolnego)",
+    "occurrence": "Wilgotne łąki i zarośla, aluwia, brzegi rowów. Odpowiadają mu gleby żyzne i wilgotne.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Młode liście i pędy (przed kwitnieniem) są jadalne i mają cenne wartości odżywcze – zawierają sporo białka, wapnia, potasu i magnezu. W Japonii i Indiach bywa hodowany jako warzywo.",
+    "category": "Astrowce",
+    "id": "123"
 
 }

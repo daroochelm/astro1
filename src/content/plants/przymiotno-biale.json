@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/przymiotno_biale_eeqhae.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/przymiotno_biale_eeqhae.jpg",
     "caption": "Przymiotno białe",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Erigeron annuus (L.) Desf)",
+    "family": "astrowate",
+    "flowering": "Czerwiec-październik",
+    "months": [6, 7, 8, 9, 10],
+    "habitat": "Gatunek rodzimy we wschodniej i środkowej części Ameryki Północnej. Jako gatunek obcy rozprzestrzeniony został także w zachodniej części tego kontynentu, w Ameryce Środkowej, na rozległych obszarach Europy i Azji oraz na wyspie Reunion. W Polsce jest kenofitem i jest bardzo pospolity.",
+    "occurrence": "Występuje w miejscach ruderalnych, na przydrożach, ugorach, w uprawach rolniczych jako chwast, a także w suchych murawach.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "Wytwarza liczne niełupki z puchem kielichowym, co sprawia, że wiatr łatwo przenosi nasiona na duże odległości.",
+    "category": "Astrowce",
+    "id": "124"
 
 }

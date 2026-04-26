@@ -2,15 +2,15 @@
     "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777122267/koniczyna_pogieta_x81a0o.jpg",
     "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777122267/koniczyna_pogieta_x81a0o.jpg",
     "caption": "Koniczyna pogięta",
-    "latina": "",
-    "family": "",
-    "flowering": "",
-    "months": [],
-    "habitat": "",
-    "occurrence": "",
+    "latina": "(Trifolium medium L.)",
+    "family": "bobowate",
+    "flowering": "Czerwiec-sierpień",
+    "months": [6, 7, 8],
+    "habitat": "Występuje w prawie całej Europie, a także w Azji Zachodniej, na Kaukazie i w Syberii. W Polsce jest dość pospolity",
+    "occurrence": "Porasta suche łąki i jasne lasy. Rośnie głównie na glebach piaszczystych i bezwapiennych.",
     "protection": "Brak ochrony gatunkowej",
-    "description": "",
-    "category": "",
-    "id": ""
+    "description": "W przeciwieństwie do koniczyny łąkowej, która tworzy zwarte kępki, koniczyna pogięta posiada podziemne rozłogi. Dzięki nim roślina ta rozrasta się, tworząc luźne, ale rozległe kobierce.",
+    "category": "Bobowce",
+    "id": "110"
 
 }
