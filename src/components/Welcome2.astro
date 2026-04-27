@@ -718,5 +718,14 @@ function getOptimizedUrl(fullUrl, width) {
         }
       });
 </script>
+<script>
+  window.addEventListener("pageshow", function (event) {
+    // Jeśli strona ładuje się z cache'u przeglądarki (przycisk Wstecz)
+    if (event.persisted) {
+      // Wymuś twarde przeładowanie, aby zresetować animację GSAP
+      window.location.reload();
+    }
+  });
+</script>
   </body>
 </html>
