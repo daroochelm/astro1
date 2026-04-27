@@ -718,19 +718,18 @@ function getOptimizedUrl(fullUrl, width) {
         }
       });
 </script>
-<script>
-  window.addEventListener("pageshow", function () {
-    // 1. Zdejmujemy klasę 'is-animating', która blokowała kolejne kliknięcia
-    const panels = document.querySelectorAll('.panel');
-    panels.forEach(panel => {
-      panel.classList.remove('is-animating');
-    });
-
-    // 2. Każemy GSAP-owi zresetować wszystkie modyfikacje, które wprowadził podczas animacji
-    if (typeof gsap !== 'undefined') {
-      gsap.set('.panel, .panel .content, .panel .overlay, .panel .panel-bg', { 
-        clearProps: "all" 
-      });
+<script is:inline>
+  window.addEventListener("pageshow", function (event) {
+    // Sprawdzamy czy strona ładuje się z cache (event.persisted) 
+    // LUB czy typ nawigacji to "back_forward" (wciśnięcie Wstecz/Dalej)
+    var isBackNavigation = event.persisted || 
+      (window.performance && 
+       window.performance.getEntriesByType("navigation").length > 0 && 
+       window.performance.getEntriesByType("navigation")[0].type === "back_forward");
+      
+    if (isBackNavigation) {
+      // Jeśli wróciliśmy na stronę, wymuszamy jej twarde przeładowanie z serwera
+      window.location.reload();
     }
   });
 </script>
