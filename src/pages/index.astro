@@ -1,13 +1,196 @@
 ---
-//import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
-// import "@fancyapps/ui/dist/fancybox/fancybox.css";
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// src/pages/index.astro
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <title>Fotografia Przyrodnicza | Wybierz Kategorię</title>
+
+    <style>
+      :root {
+        --bg-color: #050505; /* Bardzo ciemne tło do płynnego przejścia */
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+        font-family: 'Montserrat', sans-serif;
+        overflow: hidden; /* Wyłączamy scrollowanie na stronie powitalnej */
+      }
+
+      /* Pojemnik na 3 kolumny */
+      .split-container {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /* Pojedynczy panel */
+      .panel {
+        position: relative;
+        width: 33.3333%;
+        height: 100%;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      /* Tło panelu (oddzielny div, żeby można było je skalować na hover bez psucia layoutu) */
+      .panel-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      /* Overlay, żeby napisy były czytelne */
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        transition: background 0.5s ease;
+      }
+
+      /* Efekty najechania myszką (Hover) */
+      .panel:hover .panel-bg {
+        transform: scale(1.08);
+      }
+      .panel:hover .overlay {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Typografia */
+      .content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        z-index: 2;
+        pointer-events: none; /* Żeby nie blokowało kliknięcia w panel */
+      }
+
+      h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 5.5rem;
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #ddd;
+        margin-top: 10px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+      }
+
+      .panel:hover .subtitle {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Media Query dla telefonów - układa panele w poziomie */
+      @media (max-width: 768px) {
+        .split-container {
+          flex-direction: column;
+        }
+        .panel {
+          width: 100%;
+          height: 33.3333%;
+        }
+        h2 { font-size: 2.5rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="split-container">
+      
+      <div class="panel" data-url="/flora">
+        <div class="panel-bg" style="background-image: url('https://res.cloudinary.com/drvpquisg/image/upload/w_1200,c_scale,f_auto,q_auto/v1776283513/swierzbnica_polna_wka2g0.jpg');"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <h2>Flora</h2>
+          <span class="subtitle">   Kwiaty</span>
+        </div>
+      </div>
+
+      <div class="panel" data-url="/grzyby">
+        <div class="panel-bg" style="background-image: url('https://res.cloudinary.com/drvpquisg/image/upload/w_1200,c_scale,f_auto,q_auto/v1777227224/kozak_anrqhy.jpg');"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <h2>Funga</h2>
+          <span class="subtitle">Leśne Grzyby</span>
+        </div>
+      </div>
+
+      <div class="panel" data-url="/owady">
+        <div class="panel-bg" style="background-image: url('https://res.cloudinary.com/drvpquisg/image/upload/w_1200,c_scale,f_auto,q_auto/v1777226297/DSC_4233_002_wplthf.jpg');"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <h2>Fauna</h2>
+          <span class="subtitle">Owady i Pajęczaki</span>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
+    
+    <script is:inline>
+      const panels = document.querySelectorAll('.panel');
+      const isMobile = window.innerWidth <= 768;
+
+      panels.forEach(panel => {
+        panel.addEventListener('click', () => {
+          // Zabezpieczenie przed podwójnym kliknięciem
+          if (panel.classList.contains('is-animating')) return;
+          panels.forEach(p => p.classList.add('is-animating'));
+
+          const targetUrl = panel.getAttribute('data-url');
+          const otherPanels = Array.from(panels).filter(p => p !== panel);
+          const panelBg = panel.querySelector('.panel-bg');
+          const content = panel.querySelector('.content');
+
+          // Tworzymy oś czasu GSAP (Timeline)
+          const tl = gsap.timeline({
+            onComplete: () => {
+              // Po zakończeniu animacji zmieniamy adres URL strony
+              window.location.href = targetUrl;
+            }
+          });
+
+          // 1. Natychmiastowe ukrycie napisów w klikniętym panelu i overlay'a
+          tl.to(content, { opacity: 0, duration: 0.3, ease: "power1.out" }, 0);
+          tl.to(panel.querySelector('.overlay'), { opacity: 0, duration: 0.5 }, 0);
+
+          // 2. Rozciągnięcie klikniętego panelu i zwinięcie pozostałych
+          // Na komputerze zmieniamy width, na telefonie height
+          if (!isMobile) {
+            tl.to(otherPanels, { width: "0%", duration: 1.6, ease: "expo.inOut" }, 0);
+            tl.to(panel, { width: "100%", duration: 1.6, ease: "expo.inOut" }, 0);
+          } else {
+            tl.to(otherPanels, { height: "0%", duration: 1.6, ease: "expo.inOut" }, 0);
+            tl.to(panel, { height: "100%", duration: 1.6, ease: "expo.inOut" }, 0);
+          }
+
+          // 3. Po rozciągnięciu: powolne wygaszenie zdjęcia do czerni przed wejściem na galerię
+          tl.to(panelBg, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, "+=0.1");
+        });
+      });
+    </script>
+  </body>
+</html>

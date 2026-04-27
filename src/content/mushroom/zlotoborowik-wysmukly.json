@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777234641/DSC_3070_dn8gop.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777234641/DSC_3070_dn8gop.jpg",
+    "caption": "Złotoborowik wysmukły",
+    "latina": "(Aureoboletus projectellus (Murrill) Halling)",
+    "family": "borowikowate",
+    "fructing": "Lipiec-październik",
+	"months": [7, 8, 9, 10],
+    "habitat": "Złotoborowik wysmukły występuje naturalnie w Ameryce Północnej. W Polsce obecny jest na terenie całego kraju.",
+    "occurrence": "Występuje w otoczeniu sosny zwyczajnej i kosodrzewiny, z którymi związany jest mykoryzą. W Polsce najczęściej spotykany jest na siedliskach piaszczystych, na przykład na zarośniętych przez sosny wydmach lub wrzosowiskach",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Znany jest pod takimi nazwami potocznymi jak: borowik wysmukły, borowik wrzosowy lub wrzosowiskowy, złotak wysmukły i borowik amerykański.",
+    "category": "Borowikowce",
+    "id": 1
+}

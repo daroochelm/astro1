@@ -2,7 +2,7 @@
 // src/pages/index.astro
 import { getCollection } from 'astro:content';
 
-const allPlants = await getCollection('plants');
+const allPlants = await getCollection('mushroom');
 
 // --- LOGIKA DATY I SEZONU ---
 const now = new Date();
@@ -105,7 +105,7 @@ function getOptimizedUrl(fullUrl, width) {
   <body>
     <main>
       <header class="hero-header">
-        <h1>Galeria Botaniczna - Kwiaty</h1>
+        <h1>Galeria Botaniczna - Grzyby</h1>
         <span class="hero-subtitle">Autorska Fotografia Przyrodnicza</span>
         <div class="title-accent"></div>
       </header>
@@ -259,12 +259,12 @@ function getOptimizedUrl(fullUrl, width) {
         background: linear-gradient(135deg, #0d1a0d 0%, #d4af37 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1;
       }
-      .hero-subtitle { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 6px; color: #d4af37; margin-top: 1rem; font-weight: 600; }
-      .title-accent { width: 250px; height: 4px; background: #d4af37; margin: 1.5rem auto 0; border-radius: 2px; }
+      .hero-subtitle { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 6px; color: #666; margin-top: 1rem; font-weight: 600; }
+      .title-accent { width: 250px; height: 4px; background: #4ade80; margin: 1.5rem auto 0; border-radius: 2px; }
 
       .stats-dashboard { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
       .stat-card { display: flex; flex-direction: column; align-items: center; padding: 0.5rem; background: white; border: 1px solid #eaeaea; border-radius: 16px; min-width: 130px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-      .stat-number { font-size: 1.0rem; font-weight: 800; color: #d4af37; }
+      .stat-number { font-size: 1.0rem; font-weight: 800; color: #1a1a1a; }
       .stat-label { font-size: 0.6rem; color: #666; text-transform: uppercase; font-weight: 600; }
 
       .filter-section { margin-bottom: 2rem; text-align: center; }
@@ -477,7 +477,7 @@ function getOptimizedUrl(fullUrl, width) {
       <em style="color: #888; font-size: 1rem; display: block; margin-bottom: 1.5rem;">${plant.latina}</em>
       <div style="font-size: 0.9rem; line-height: 1.4;">
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Rodzina:</strong> ${plant.family}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Kwitnienie:</strong> ${plant.flowering}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Owocowanie:</strong> ${plant.fructing}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Występowanie:</strong> ${plant.habitat}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Siedlisko:</strong> ${plant.occurrence}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Ochrona:</strong> ${plant.protection}</p>

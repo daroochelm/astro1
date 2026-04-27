@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777227224/kozak_anrqhy.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777227224/kozak_anrqhy.jpg",
+    "caption": "Koźlarz czerwony",
+    "latina": "(Leccinum aurantiacum (Bull.) Gray)",
+    "family": "borowikowate",
+    "fructing": "Czerwiec-październik",
+	"months": [6, 7, 8, 9, 10],
+    "habitat": "Najliczniejsze stanowiska tego grzyba znane są w Ameryce Północnej i Europie, ale występuje także w Ameryce Środkowej i Japonii",
+    "occurrence": "Występuje w lasach i zaroślach, wyłącznie pod topolą osiką",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "W Polsce funkcjonuje pod wieloma nazwami, takimi jak: osiczak, czerwoniak, czerwona babka, czerwony borowik czy czerwonogłowiec.",
+    "category": "Borowikowce",
+    "id": 1
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "src": {
+      "type": "string"
+    },
+    "thumb": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "latina": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "fructing": {
+      "type": "string"
+    },
+    "months": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "habitat": {
+      "type": "string"
+    },
+    "occurrence": {
+      "type": "string"
+    },
+    "protection": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "src",
+    "thumb",
+    "caption",
+    "latina",
+    "family",
+    "fructing",
+    "habitat",
+    "occurrence",
+    "protection",
+    "description",
+    "category"
+  ]
+}

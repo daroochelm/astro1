@@ -2,7 +2,7 @@
 // src/pages/index.astro
 import { getCollection } from 'astro:content';
 
-const allPlants = await getCollection('plants');
+const allPlants = await getCollection('insect');
 
 // --- LOGIKA DATY I SEZONU ---
 const now = new Date();
@@ -105,7 +105,7 @@ function getOptimizedUrl(fullUrl, width) {
   <body>
     <main>
       <header class="hero-header">
-        <h1>Galeria Botaniczna - Kwiaty</h1>
+        <h1>Galeria Botaniczna - Owady</h1>
         <span class="hero-subtitle">Autorska Fotografia Przyrodnicza</span>
         <div class="title-accent"></div>
       </header>
@@ -139,7 +139,7 @@ function getOptimizedUrl(fullUrl, width) {
                 <path d="M12,22C12,22 13,18 13,15C13,12 12,12 12,12C12,12 11,12 11,15C11,18 12,22 12,22M17,14C17,14 20,15 22,14C24,13 21,11 19,11C17,11 15,12 15,12C15,12 15,13 17,14M7,14C7,14 4,15 2,14C0,13 3,11 5,11C7,11 9,12 9,12C9,12 9,13 7,14M18.5,7C18.5,7 20,4.5 19,3C18,1.5 16,3 15,4.5C14,6 14,8 14,8C14,8 15,8 18.5,7M5.5,7C5.5,7 4,4.5 5,3C6,1.5 8,3 9,4.5C10,6 10,8 10,8C10,8 9,8 5.5,7Z"/>
               </svg>
             </div>
-            <span>&ndash; aktualnie kwitnie w naturze</span>
+            <span>&ndash; aktualnie aktywny w naturze</span>
           </div>
         </div>
       </div>
@@ -259,12 +259,12 @@ function getOptimizedUrl(fullUrl, width) {
         background: linear-gradient(135deg, #0d1a0d 0%, #d4af37 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1;
       }
-      .hero-subtitle { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 6px; color: #d4af37; margin-top: 1rem; font-weight: 600; }
-      .title-accent { width: 250px; height: 4px; background: #d4af37; margin: 1.5rem auto 0; border-radius: 2px; }
+      .hero-subtitle { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 6px; color: #666; margin-top: 1rem; font-weight: 600; }
+      .title-accent { width: 250px; height: 4px; background: #4ade80; margin: 1.5rem auto 0; border-radius: 2px; }
 
       .stats-dashboard { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
       .stat-card { display: flex; flex-direction: column; align-items: center; padding: 0.5rem; background: white; border: 1px solid #eaeaea; border-radius: 16px; min-width: 130px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-      .stat-number { font-size: 1.0rem; font-weight: 800; color: #d4af37; }
+      .stat-number { font-size: 1.0rem; font-weight: 800; color: #1a1a1a; }
       .stat-label { font-size: 0.6rem; color: #666; text-transform: uppercase; font-weight: 600; }
 
       .filter-section { margin-bottom: 2rem; text-align: center; }
@@ -334,7 +334,7 @@ function getOptimizedUrl(fullUrl, width) {
       .overlay-text { transform: translateY(10px); transition: transform 0.4s ease; display: flex; flex-direction: column; gap: 4px; }
       .gallery-item:hover .overlay-text { transform: translateY(0); }
       .caption-pl { color: #ffffff !important; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-      .caption-latina { color: #4ade80 !important; font-size: 0.9rem; font-style: italic; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+      .caption-latina { color: #d4af37 !important; font-size: 0.9rem; font-style: italic; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
       
       .gallery-item:hover .grid-img-botanical { transform: scale(1.05); filter: brightness(0.9); }
       .gallery-item::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2; mix-blend-mode: color-dodge; }
@@ -477,7 +477,7 @@ function getOptimizedUrl(fullUrl, width) {
       <em style="color: #888; font-size: 1rem; display: block; margin-bottom: 1.5rem;">${plant.latina}</em>
       <div style="font-size: 0.9rem; line-height: 1.4;">
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Rodzina:</strong> ${plant.family}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Kwitnienie:</strong> ${plant.flowering}</p>
+        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Aktywność  :</strong> ${plant.activity}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Występowanie:</strong> ${plant.habitat}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Siedlisko:</strong> ${plant.occurrence}</p>
         <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Ochrona:</strong> ${plant.protection}</p>
