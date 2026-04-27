@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto/v1777276668/suchogrzybek_d4dzww.jpg",
+    "thumb":"https://res.cloudinary.com/drvpquisg/image/upload/f_auto,q_auto,w_100,c_fit/v1777276668/suchogrzybek_d4dzww.jpg",
+    "caption": "Suchogrzybek złotopory",
+    "latina": "(Xerocomellus chrysenteron (Bull.) Šutara)",
+    "family": "borowikowate",
+    "fructing": "Czerwiec-listopad",
+	"months": [6, 7, 8, 9, 10, 11],
+    "habitat": "Jest pospolity na całej półkuli północnej w strefie klimatu umiarkowanego. W Polsce jest bardzo pospolity.",
+    "occurrence": "Występuje w lasach iglastych i liściastych, parkach. Rośnie na ziemi pod bukiem, sosną zwyczajną, dębem szkarłatnym, dębem bezszypułkowym, dębem szypułkowym.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Regionalne nazwy: grzyb złotawy, złoty grzyb, borowik złotawy, grzyb czerwonotrzonowy, grzyb zajęczy, grzyb zającowy, zajączek, zajęczak, czerwona noga.",
+    "category": "Borowikowce",
+    "id": 3
+}
