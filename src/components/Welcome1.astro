@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import { getCollection } from 'astro:content';
 import CookieBanner from '../components/CookieBanner.astro';
+import Navigation from '../components/Navigation.astro';
 const allPlants = await getCollection('mushroom');
 
 // --- LOGIKA DATY I SEZONU ---
@@ -103,6 +104,7 @@ function getOptimizedUrl(fullUrl, width) {
     <title>Galeria Botaniczna | Autorska Fotografia Przyrodnicza</title>
   </head>
   <body>
+    <Navigation />
     <main>
       <header class="hero-header">
         <h1>Galeria Botaniczna - Grzyby</h1>
@@ -239,6 +241,9 @@ function getOptimizedUrl(fullUrl, width) {
         --text-color: #ffffff;
         --accent-color: #d4af37;
       }
+      body {
+        padding-top: 80px; /* Zrób miejsce na nawigację */
+      }
       html, body {
         margin: 0;
         padding: 0;
@@ -252,7 +257,7 @@ function getOptimizedUrl(fullUrl, width) {
       }
       main { max-width: 80%; margin: 0 auto; padding: 2rem; font-family: system-ui, sans-serif; background: transparent; min-height: 100vh; }
       
-      .hero-header { text-align: center; margin-top: 1rem; margin-bottom: 1rem; }
+      .hero-header { text-align: center; margin-top: 2.5rem; margin-bottom: 1rem; }
       .hero-header h1 {
         font-size: 3.0rem; font-weight: 800; font-family: ui-serif, Georgia, serif; 
         margin: 0; letter-spacing: -1px;

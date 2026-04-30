@@ -1,0 +1,95 @@
+---
+// src/components/Navigation.astro
+---
+
+<nav class="main-nav">
+    <div class="nav-container">
+      <!-- Link powrotny do animacji startowej -->
+      <a href="/" class="nav-logo">Atlas Natury</a>
+      
+      <!-- Linki do poszczególnych galerii -->
+      <ul class="nav-links">
+        <li><a href="/flora">Flora</a></li>
+        <li><a href="/grzyby">Funga</a></li>
+        <li><a href="/owady">Fauna</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <style>
+    /* Główne tło menu na samej górze */
+    .main-nav {
+      position: fixed; /* Przykleja menu do góry ekranu, podąża za scrollem */
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(5, 5, 5, 0.9); /* Półprzezroczysta głęboka czerń */
+      backdrop-filter: blur(10px); /* Kinowy efekt rozmycia tła pod menu */
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Delikatna, złota linia */
+      z-index: 1000; /* Zawsze na wierzchu */
+      font-family: 'Montserrat', sans-serif; /* Dopasuj do swojej czcionki */
+    }
+  
+    .nav-container {
+      max-width: 1200px; /* Szerokość dopasowana do Twojej galerii */
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    /* Logo po lewej stronie */
+    .nav-logo {
+      color: #d4af37; /* Złoty akcent */
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+  
+    .nav-logo:hover {
+      opacity: 0.8;
+    }
+  
+    /* Kontener na linki po prawej stronie */
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: all 0.3s ease;
+    }
+  
+    /* Efekt najechania myszką (złoty kolor i delikatne przesunięcie) */
+    .nav-links a:hover {
+      color: #d4af37;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+  
+    /* Responsywność dla urządzeń mobilnych */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 20px;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
