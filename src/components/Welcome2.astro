@@ -459,291 +459,287 @@ function getOptimizedUrl(fullUrl, width) {
     </style>
 
 <script>
-  const rawData = document.getElementById('gallery-data').textContent;
-  const allPlantsData = JSON.parse(rawData);
+  // Flaga bezpieczeństwa: zapobiegnie spowolnieniu przeglądarki!
+  let isGlobalEventsAttached = false;
 
-  const lightbox = document.getElementById('custom-lightbox');
-  const clImage = document.getElementById('cl-image') as HTMLImageElement;
-  const clSidebar = document.getElementById('cl-sidebar');
-  let currentIndex = -1;
+  document.addEventListener('astro:page-load', () => {
+    
+    // --- ZABEZPIECZENIE ---
+    // Sprawdzamy czy na obecnej stronie w ogóle jest galeria (np. omijamy ekran startowy)
+    const dataElement = document.getElementById('gallery-data');
+    if (!dataElement) return; // Jeśli nie ma danych o roślinach/grzybach, przerywamy skrypt!
 
-  // --- 1. LIGHTBOX ---
-  function generateSidebarHTML(plant) {
-    let relatedHTML = '';
-    if (plant.relatedData && plant.relatedData.length > 0) {
-      relatedHTML = `
-        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed #444;">
-          <p style="font-size: 0.75rem; text-transform: uppercase; color: #888; margin-bottom: 0.8rem;">Inne z rodziny ${plant.family}:</p>
-          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-            ${plant.relatedData.map(rel => `
-              <button onclick="window.openPlant(${rel.index})" style="background:transparent; border:none; padding:0; text-align:left; color:#4ade80; font-size:0.9rem; display:flex; align-items:center; gap:12px; cursor:pointer; width:100%;">
-                <img src="${rel.thumb}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px;">
-                <span>${rel.title}</span>
-              </button>
-            `).join('')}
-          </div>
-        </div>`;
+    const rawData = dataElement.textContent;
+    const allPlantsData = JSON.parse(rawData);
+
+    const lightbox = document.getElementById('custom-lightbox');
+    const clImage = document.getElementById('cl-image') as HTMLImageElement;
+    const clSidebar = document.getElementById('cl-sidebar');
+    let currentIndex = -1;
+
+    // --- 1. LIGHTBOX ---
+    function generateSidebarHTML(plant) {
+      let relatedHTML = '';
+      if (plant.relatedData && plant.relatedData.length > 0) {
+        relatedHTML = `
+          <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px dashed #444;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; color: #888; margin-bottom: 0.8rem;">Inne z rodziny ${plant.family}:</p>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              ${plant.relatedData.map(rel => `
+                <button onclick="window.openPlant(${rel.index})" style="background:transparent; border:none; padding:0; text-align:left; color:#4ade80; font-size:0.9rem; display:flex; align-items:center; gap:12px; cursor:pointer; width:100%;">
+                  <img src="${rel.thumb}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px;">
+                  <span>${rel.title}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>`;
+      }
+      return `
+      <br>
+      <h2 style="margin: 0 0 0.2rem 0; font-size: 1.6rem; color: #ffffff;">${plant.caption}</h2>
+        <em style="color: #888; font-size: 1rem; display: block; margin-bottom: 1.5rem;">${plant.latina}</em>
+        <div style="font-size: 0.9rem; line-height: 1.4;">
+          <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Rodzina:</strong> ${plant.family}</p>
+          <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Kwitnienie:</strong> ${plant.flowering}</p>
+          <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Występowanie:</strong> ${plant.habitat}</p>
+          <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Siedlisko:</strong> ${plant.occurrence}</p>
+          <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Ochrona:</strong> ${plant.protection}</p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
+        <p style="line-height: 1.6; color: #ddd; font-style: italic;">${plant.description}</p>
+        ${relatedHTML}`;
     }
-    return `
-    <br>
-    <h2 style="margin: 0 0 0.2rem 0; font-size: 1.6rem; color: #ffffff;">${plant.caption}</h2>
-      <em style="color: #888; font-size: 1rem; display: block; margin-bottom: 1.5rem;">${plant.latina}</em>
-      <div style="font-size: 0.9rem; line-height: 1.4;">
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Rodzina:</strong> ${plant.family}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Aktywność  :</strong> ${plant.activity}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Występowanie:</strong> ${plant.habitat}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Siedlisko:</strong> ${plant.occurrence}</p>
-        <p style="margin: 0.4rem 0;"><strong style="color: #aaa; text-transform: uppercase; font-size: 0.75rem;">Ochrona:</strong> ${plant.protection}</p>
-      </div>
-      <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
-      <p style="line-height: 1.6; color: #ddd; font-style: italic;">${plant.description}</p>
-      ${relatedHTML}`;
-  }
 
-  window.openPlant = (index) => {
-    currentIndex = index;
-    const plant = allPlantsData[index];
-    clImage.classList.add('loading');
-    setTimeout(() => {
-      clImage.src = plant.src;
-      clSidebar.innerHTML = generateSidebarHTML(plant);
-      clImage.onload = () => clImage.classList.remove('loading');
-    }, 150);
-    lightbox.classList.remove('hidden');
-    document.body.classList.add('lightbox-open');
-  };
+    window.openPlant = (index) => {
+      currentIndex = index;
+      const plant = allPlantsData[index];
+      clImage.classList.add('loading');
+      setTimeout(() => {
+        clImage.src = plant.src;
+        clSidebar.innerHTML = generateSidebarHTML(plant);
+        clImage.onload = () => clImage.classList.remove('loading');
+      }, 150);
+      lightbox.classList.remove('hidden');
+      document.body.classList.add('lightbox-open');
+    };
 
-  window.closeLightbox = () => {
-    lightbox.classList.add('hidden');
-    document.body.classList.remove('lightbox-open');
-    setTimeout(() => { clImage.src = ''; }, 300);
-  };
+    window.closeLightbox = () => {
+      lightbox.classList.add('hidden');
+      document.body.classList.remove('lightbox-open');
+      setTimeout(() => { clImage.src = ''; }, 300);
+    };
 
-  window.prevPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex > 0 ? currentIndex - 1 : allPlantsData.length - 1); };
-  window.nextPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex < allPlantsData.length - 1 ? currentIndex + 1 : 0); };
+    window.prevPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex > 0 ? currentIndex - 1 : allPlantsData.length - 1); };
+    window.nextPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex < allPlantsData.length - 1 ? currentIndex + 1 : 0); };
 
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('hidden')) {
-      if (e.key === "Escape") window.closeLightbox();
-      if (e.key === "ArrowLeft") window.prevPlant();
-      if (e.key === "ArrowRight") window.nextPlant();
-    }
-  });
 
-  // --- 2. WYSZUKIWARKA TEKSTOWA ---
-  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-      let currentSearch = '';
+    // --- 2. WYSZUKIWARKA TEKSTOWA ---
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    let currentSearch = '';
 
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => { 
-          currentSearch = (e.target as HTMLInputElement).value.toLowerCase().trim(); 
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => { 
+        currentSearch = (e.target as HTMLInputElement).value.toLowerCase().trim(); 
+        
+        document.querySelectorAll('.dashboard-section').forEach((section: HTMLElement) => {
           
-          document.querySelectorAll('.dashboard-section').forEach((section: HTMLElement) => {
-            
-            // 1. Identyfikujemy, czy to sekcja nowości (używamy klasy highlight-section lub ID)
-            const isRecentSection = section.classList.contains('highlight-section') || section.id === 'recent-section';
+          const isRecentSection = section.classList.contains('highlight-section') || section.id === 'recent-section';
 
-            // 2. Jeśli szukamy, ukrywamy "Ostatnio dodane" i pomijamy resztę kodu dla tej sekcji
-            if (currentSearch !== '' && isRecentSection) {
-              section.style.display = 'none';
-              return; 
-            }
+          if (currentSearch !== '' && isRecentSection) {
+            section.style.display = 'none';
+            return; 
+          }
 
-            // 3. Normalne filtrowanie dla pozostałych kategorii
-            let visibleInThisSection = 0;
-            const items = section.querySelectorAll('.gallery-item');
+          let visibleInThisSection = 0;
+          const items = section.querySelectorAll('.gallery-item');
+          
+          items.forEach((item: HTMLElement) => {
+            const itemSearch = (item.getAttribute('data-search') || '').toLowerCase();
             
-            items.forEach((item: HTMLElement) => {
-              const itemSearch = (item.getAttribute('data-search') || '').toLowerCase();
-              
-              if (currentSearch === '') {
-                item.style.removeProperty('display'); // Reset do ustawień CSS
+            if (currentSearch === '') {
+              item.style.removeProperty('display');
+              visibleInThisSection++;
+            } else {
+              if (itemSearch.includes(currentSearch)) {
+                item.style.setProperty('display', 'block', 'important');
                 visibleInThisSection++;
               } else {
-                if (itemSearch.includes(currentSearch)) {
-                  item.style.setProperty('display', 'block', 'important');
-                  visibleInThisSection++;
-                } else {
-                  item.style.setProperty('display', 'none', 'important');
-                }
-              }
-            });
-
-            // 4. Logika rozwijania/ukrywania całych sekcji
-            if (!isRecentSection) {
-              const grid = section.querySelector('.expandable-grid');
-              const expandBtn = section.querySelector('.expand-action') as HTMLElement;
-              
-              if (currentSearch !== '') {
-                grid?.classList.add('is-expanded');
-                if(expandBtn) expandBtn.style.display = 'none';
-                section.style.display = (visibleInThisSection > 0) ? 'block' : 'none';
-              } else {
-                grid?.classList.remove('is-expanded');
-                if(expandBtn) expandBtn.style.display = 'flex';
-                section.style.display = items.length > 0 ? 'block' : 'none';
-              }
-            } else {
-              // Przywracamy "Ostatnio dodane", gdy wyszukiwarka jest znowu pusta
-              if (currentSearch === '') {
-                section.style.display = 'block';
+                item.style.setProperty('display', 'none', 'important');
               }
             }
           });
-        });
-      }
 
-  // --- 3. PRZYCISKI "ZOBACZ POZOSTAŁE" ---
-  document.querySelectorAll('.expand-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const targetCat = (e.target as HTMLElement).getAttribute('data-target');
-      const grid = document.querySelector(`.expandable-grid[data-cat="${targetCat}"]`);
-      if (grid) {
-        grid.classList.add('is-expanded');
-        (e.target as HTMLElement).closest('.expand-action')?.setAttribute('style', 'display: none !important');
-      }
-    });
-  });
-
-  // --- 4. TRYB MUZEUM (MIESIĄCE) ---
-  const dashboard = document.querySelector('.dashboard-container');
-  const monthBtns = document.querySelectorAll('.month-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
-
-  monthBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      monthBtns.forEach(b => b.classList.remove('active'));
-      const currentBtn = e.currentTarget as HTMLElement;
-      currentBtn.classList.add('active');
-
-      const selectedMonth = currentBtn.getAttribute('data-month');
-
-      if (selectedMonth === 'all') {
-        if (dashboard) dashboard.classList.remove('museum-mode');
-        galleryItems.forEach((item: HTMLElement) => {
-          item.classList.remove('spotlight');
-        });
-        return;
-      }
-
-      if (dashboard) dashboard.classList.add('museum-mode');
-      
-      galleryItems.forEach((item: HTMLElement) => {
-        const itemMonths = (item.getAttribute('data-months') || '').split(',').map(m => m.trim());
-        if (itemMonths.includes(selectedMonth)) {
-          item.classList.add('spotlight');
-        } else {
-          item.classList.remove('spotlight');
-        }
-      });
-    });
-  });
-
-  // --- 5. EFEKTY WIZUALNE I AUDIO (WIATR) ---
-  let scrollVelocity = 0;
-  let lastScrollPos = window.scrollY;
-  let windTimeout;
-  
-  window.addEventListener('scroll', () => {
-    scrollVelocity = window.scrollY - lastScrollPos;
-    lastScrollPos = window.scrollY;
-    let windForce = Math.max(-5, Math.min(5, scrollVelocity * 0.15));
-    
-    const items = document.querySelectorAll('.gallery-item');
-    items.forEach((item: HTMLElement) => {
-      item.style.transition = 'none';
-      item.style.transform = `perspective(1000px) rotateX(${windForce * 1.5}deg) translateY(${windForce}px)`;
-    });
-    
-    clearTimeout(windTimeout);
-    windTimeout = setTimeout(() => {
-      items.forEach((item: HTMLElement) => {
-        item.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
-        item.style.transform = `perspective(1000px) rotateX(0deg) translateY(0deg)`;
-      });
-    }, 150);
-  });
-
-  const audioBtn = document.getElementById('audio-toggle-btn');
-  const forestAudio = document.getElementById('forest-audio') as HTMLAudioElement;
-  
-  if (audioBtn && forestAudio) {
-    forestAudio.volume = 0.6;
-    const iconMuted = audioBtn.querySelector('.icon-muted');
-    const iconPlaying = audioBtn.querySelector('.icon-playing');
-
-    audioBtn.addEventListener('click', () => {
-      if (forestAudio.paused) {
-        forestAudio.play().then(() => {
-          audioBtn.classList.add('is-playing');
-          iconMuted?.classList.add('hidden');
-          iconPlaying?.classList.remove('hidden');
-        }).catch(e => console.error(e));
-      } else {
-        forestAudio.pause();
-        audioBtn.classList.remove('is-playing');
-        iconPlaying?.classList.add('hidden');
-        iconMuted?.classList.remove('hidden');
-      }
-    });
-  }
-
-  // --- 6. MYSZ (ŚWIATŁO NA KAFELKU) ---
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = (item as HTMLElement).getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      (item as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
-      (item as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
-    });
-  });
-
-  // --- 7. MOTYW CZASOWY ---
-  
-
-  
-  // --- LOGIKA PRZYCISKÓW "POKAŻ POZOSTAŁE" ---
-  document.querySelectorAll('.dashboard-section').forEach(section => {
-        // Szukamy siatki i przycisku wewnątrz każdej kategorii
-        const grid = section.querySelector('.expandable-grid');
-        const btn = section.querySelector('.expand-btn'); 
-
-        if (grid && btn) {
-          // Liczymy, ile jest wszystkich zdjęć w tej kategorii
-          const totalItems = grid.querySelectorAll('.gallery-item').length;
-
-          // Podpinamy akcję kliknięcia
-          btn.addEventListener('click', (e) => {
-            e.preventDefault(); // Zapobiega przeładowaniu/skakaniu strony
+          if (!isRecentSection) {
+            const grid = section.querySelector('.expandable-grid');
+            const expandBtn = section.querySelector('.expand-action') as HTMLElement;
             
-            // Magiczna funkcja toggle - dodaje klasę 'expanded', jeśli jej nie ma, i usuwa, jeśli jest
-            const isExpanded = grid.classList.toggle('expanded');
-            
-            if (isExpanded) {
-              btn.innerHTML = 'Zwiń &uarr;';
+            if (currentSearch !== '') {
+              grid?.classList.add('is-expanded');
+              if(expandBtn) expandBtn.style.display = 'none';
+              section.style.display = (visibleInThisSection > 0) ? 'block' : 'none';
             } else {
-              btn.innerHTML = `Pokaż pozostałe (${totalItems})`;
-              // Gładki powrót do tytułu kategorii po zwinięciu siatki
-              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              grid?.classList.remove('is-expanded');
+              if(expandBtn) expandBtn.style.display = 'flex';
+              section.style.display = items.length > 0 ? 'block' : 'none';
             }
-          });
-        }
+          } else {
+            if (currentSearch === '') {
+              section.style.display = 'block';
+            }
+          }
+        });
       });
-</script>
-<script is:inline>
-  window.addEventListener("pageshow", function (event) {
-    // Sprawdzamy czy strona ładuje się z cache (event.persisted) 
-    // LUB czy typ nawigacji to "back_forward" (wciśnięcie Wstecz/Dalej)
-    var isBackNavigation = event.persisted || 
-      (window.performance && 
-       window.performance.getEntriesByType("navigation").length > 0 && 
-       window.performance.getEntriesByType("navigation")[0].type === "back_forward");
-      
-    if (isBackNavigation) {
-      // Jeśli wróciliśmy na stronę, wymuszamy jej twarde przeładowanie z serwera
-      window.location.reload();
     }
+
+    // --- 3. PRZYCISKI "ZOBACZ POZOSTAŁE" (Zwykłe) ---
+    document.querySelectorAll('.expand-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const targetCat = (e.target as HTMLElement).getAttribute('data-target');
+        const grid = document.querySelector(`.expandable-grid[data-cat="${targetCat}"]`);
+        if (grid) {
+          grid.classList.add('is-expanded');
+          (e.target as HTMLElement).closest('.expand-action')?.setAttribute('style', 'display: none !important');
+        }
+      });
+    });
+
+    // --- 4. TRYB MUZEUM (MIESIĄCE) ---
+    const dashboard = document.querySelector('.dashboard-container');
+    const monthBtns = document.querySelectorAll('.month-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    monthBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        monthBtns.forEach(b => b.classList.remove('active'));
+        const currentBtn = e.currentTarget as HTMLElement;
+        currentBtn.classList.add('active');
+
+        const selectedMonth = currentBtn.getAttribute('data-month');
+
+        if (selectedMonth === 'all') {
+          if (dashboard) dashboard.classList.remove('museum-mode');
+          galleryItems.forEach((item: HTMLElement) => {
+            item.classList.remove('spotlight');
+          });
+          return;
+        }
+
+        if (dashboard) dashboard.classList.add('museum-mode');
+        
+        galleryItems.forEach((item: HTMLElement) => {
+          const itemMonths = (item.getAttribute('data-months') || '').split(',').map(m => m.trim());
+          if (itemMonths.includes(selectedMonth)) {
+            item.classList.add('spotlight');
+          } else {
+            item.classList.remove('spotlight');
+          }
+        });
+      });
+    });
+
+    // --- 5. EFEKTY AUDIO ---
+    const audioBtn = document.getElementById('audio-toggle-btn');
+    const forestAudio = document.getElementById('forest-audio') as HTMLAudioElement;
+    
+    if (audioBtn && forestAudio) {
+      forestAudio.volume = 0.6;
+      const iconMuted = audioBtn.querySelector('.icon-muted');
+      const iconPlaying = audioBtn.querySelector('.icon-playing');
+
+      audioBtn.addEventListener('click', () => {
+        if (forestAudio.paused) {
+          forestAudio.play().then(() => {
+            audioBtn.classList.add('is-playing');
+            iconMuted?.classList.add('hidden');
+            iconPlaying?.classList.remove('hidden');
+          }).catch(e => console.error(e));
+        } else {
+          forestAudio.pause();
+          audioBtn.classList.remove('is-playing');
+          iconPlaying?.classList.add('hidden');
+          iconMuted?.classList.remove('hidden');
+        }
+      });
+    }
+
+    // --- 6. MYSZ (ŚWIATŁO NA KAFELKU) ---
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = (item as HTMLElement).getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        (item as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+        (item as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+
+    // --- 7. LOGIKA PRZYCISKÓW "POKAŻ POZOSTAŁE" (Z toggle) ---
+    document.querySelectorAll('.dashboard-section').forEach(section => {
+      const grid = section.querySelector('.expandable-grid');
+      const btn = section.querySelector('.expand-btn'); 
+
+      if (grid && btn) {
+        const totalItems = grid.querySelectorAll('.gallery-item').length;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault(); 
+          const isExpanded = grid.classList.toggle('expanded');
+          
+          if (isExpanded) {
+            btn.innerHTML = 'Zwiń &uarr;';
+          } else {
+            btn.innerHTML = `Pokaż pozostałe (${totalItems})`;
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+    });
+
+
+    // =====================================================================
+    // EFEKTY GLOBALNE (Przypinamy je tylko raz, żeby zapobiec wyciekom pamięci)
+    // =====================================================================
+    if (!isGlobalEventsAttached) {
+      
+      // OBSŁUGA KLAWIATURY (Lightbox)
+      document.addEventListener('keydown', (e) => {
+        // Zawsze szukamy aktualnego lightboxa, na wypadek gdyby Astro go podmieniło
+        const currentLightbox = document.getElementById('custom-lightbox');
+        if (currentLightbox && !currentLightbox.classList.contains('hidden')) {
+          if (e.key === "Escape") window.closeLightbox();
+          if (e.key === "ArrowLeft") window.prevPlant();
+          if (e.key === "ArrowRight") window.nextPlant();
+        }
+      });
+
+      // EFEKT WIATRU (Scroll)
+      let scrollVelocity = 0;
+      let lastScrollPos = window.scrollY;
+      let windTimeout;
+      
+      window.addEventListener('scroll', () => {
+        scrollVelocity = window.scrollY - lastScrollPos;
+        lastScrollPos = window.scrollY;
+        let windForce = Math.max(-5, Math.min(5, scrollVelocity * 0.15));
+        
+        // Zawsze szukamy obrazków w locie! Dzięki temu wiatr działa też na nowych podstronach.
+        const currentItems = document.querySelectorAll('.gallery-item');
+        currentItems.forEach((item: HTMLElement) => {
+          item.style.transition = 'none';
+          item.style.transform = `perspective(1000px) rotateX(${windForce * 1.5}deg) translateY(${windForce}px)`;
+        });
+        
+        clearTimeout(windTimeout);
+        windTimeout = setTimeout(() => {
+          currentItems.forEach((item: HTMLElement) => {
+            item.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
+            item.style.transform = `perspective(1000px) rotateX(0deg) translateY(0deg)`;
+          });
+        }, 150);
+      });
+
+      isGlobalEventsAttached = true; // Zabezpieczenie uzbrojone!
+    }
+
   });
 </script>
 <CookieBanner />
