@@ -255,9 +255,12 @@ function getOptimizedUrl(fullUrl, width) {
       html {
         scroll-behavior: smooth;
       }
+      body {
+          padding-top: 80px; /* Zrób miejsce na nawigację */
+      }
       main { max-width: 80%; margin: 0 auto; padding: 2rem; font-family: system-ui, sans-serif; background: transparent; min-height: 100vh; }
       
-      .hero-header { text-align: center; margin-top: 1rem; margin-bottom: 1rem; }
+      .hero-header { text-align: center; margin-top: 2.5rem; margin-bottom: 1rem; }
       .hero-header h1 {
         font-size: 3.0rem; font-weight: 800; font-family: ui-serif, Georgia, serif; 
         margin: 0; letter-spacing: -1px;
