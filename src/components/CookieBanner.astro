@@ -1,0 +1,102 @@
+---
+// src/components/CookieBanner.astro
+---
+
+<div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+      <p>
+        Ta strona korzysta z ciasteczek (cookies), aby zapewnić Ci najlepsze wrażenia z przeglądania naszej galerii. 
+        Kontynuując, wyrażasz na to zgodę.
+      </p>
+      <button id="accept-cookies" class="cookie-btn">Akceptuję</button>
+    </div>
+  </div>
+  
+  <style>
+    /* Domyślnie ukrywamy baner, żeby uniknąć "mrugania" przy przeładowaniu */
+    .cookie-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(5, 5, 5, 0.95); /* Głęboka czerń z lekką przezroczystością */
+      border-top: 1px solid rgba(212, 175, 55, 0.2); /* Delikatna, złota linia na górze */
+      color: #ffffff;
+      z-index: 9999; /* Zawsze na samym wierzchu */
+      padding: 15px 0;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+      font-family: 'Montserrat', sans-serif;
+    }
+  
+    /* Klasa dodawana przez JS, gdy trzeba pokazać baner */
+    .cookie-banner.show {
+      display: block;
+    }
+  
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+  
+    .cookie-content p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #cccccc;
+    }
+  
+    .cookie-btn {
+      background-color: #d4af37; /* Szlachetne złoto */
+      color: #050505;
+      border: none;
+      padding: 10px 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  
+    .cookie-btn:hover {
+      background-color: #facc15; /* Jaśniejsze złoto na hover */
+      transform: translateY(-2px);
+    }
+  
+    /* RWD dla telefonów */
+    @media (max-width: 768px) {
+      .cookie-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .cookie-btn {
+        width: 100%;
+      }
+    }
+  </style>
+  
+  <script is:inline>
+    // Używamy is:inline, aby skrypt wykonał się natychmiast i ominął ViewTransitions/Cache
+    document.addEventListener("DOMContentLoaded", function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+  
+      // Sprawdzamy, czy użytkownik już zaakceptował ciasteczka
+      if (!localStorage.getItem('cookieConsent')) {
+        banner.classList.add('show'); // Jeśli nie, pokazujemy baner
+      }
+  
+      // Obsługa kliknięcia przycisku
+      acceptBtn.addEventListener('click', function() {
+        localStorage.setItem('cookieConsent', 'true'); // Zapisujemy decyzję na zawsze
+        banner.classList.remove('show'); // Ukrywamy baner
+      });
+    });
+  </script>

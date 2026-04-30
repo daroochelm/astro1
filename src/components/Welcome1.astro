@@ -1,7 +1,7 @@
 ---
 // src/pages/index.astro
 import { getCollection } from 'astro:content';
-
+import CookieBanner from '../components/CookieBanner.astro';
 const allPlants = await getCollection('mushroom');
 
 // --- LOGIKA DATY I SEZONU ---
@@ -718,5 +718,6 @@ function getOptimizedUrl(fullUrl, width) {
         }
       });
 </script>
+<CookieBanner />
   </body>
 </html>
