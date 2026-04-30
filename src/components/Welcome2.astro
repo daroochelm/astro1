@@ -288,8 +288,10 @@ function getOptimizedUrl(fullUrl, width) {
       }
 
       .filters::-webkit-scrollbar {
-        display: none; }
+        display: none; 
+      }
       .month-filters { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    
       .month-filters-container { overflow-x: auto; margin-bottom: 2rem; scrollbar-width: none; }
       
       .filter-btn, .month-btn { 
@@ -298,19 +300,10 @@ function getOptimizedUrl(fullUrl, width) {
         font-weight: 400; letter-spacing: 0.3px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
         text-decoration: none;
       }
-      .filters {
-        display: flex !important;
-        flex-wrap: nowrap !important; /* Wymuszamy 1 linię bezdyskusyjnie */
-        overflow-x: auto !important;  /* Wymuszamy suwak na telefonach */
-        gap: 12px;
-        padding-bottom: 10px; 
-        -webkit-overflow-scrolling: touch; 
-        scrollbar-width: none; 
-        -ms-overflow-style: none; 
+      .month-btn {
+        flex-shrink: 0 !important; /* Blokujemy zgniecenie */
+        white-space: nowrap !important; /* Blokujemy łamanie do nowej linii */
       }
-
-      .filters::-webkit-scrollbar {
-        display: none; }
       .filter-btn.active, .month-btn.active { background: #4ade80; color: #000000; font-weight: 500; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
       .count-badge { font-size: 0.65rem; color: #ffffff; background: #111111; font-weight: 500; padding: 2px 7px; border-radius: 12px; }
       .filter-btn.active .count-badge { color: #000000; background: #ffffff; }
