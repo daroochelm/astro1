@@ -242,6 +242,7 @@ function getOptimizedUrl(fullUrl, width) {
         --accent-color: #d4af37;
       }
       body {
+        margin: 0;
         padding-top: 80px; /* Zrób miejsce na nawigację */
 }
       html, body {
@@ -291,6 +292,10 @@ function getOptimizedUrl(fullUrl, width) {
       .filter-btn.active .count-badge { color: #000000; background: #ffffff; }
 
       .gallery-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 1rem; }
+      .gallery-container {
+        margin-top: 0;
+        padding-top: 20px; /* Używamy paddingu zamiast marginesu, jest stabilniejszy */
+}
       .search-container { position: relative; display: flex; align-items: center; flex: 1; max-width: 350px; }
       .search-icon { position: absolute; left: 1rem; width: 18px !important; height: 18px !important; top: 50%; transform: translateY(-50%); color: #888; z-index: 2; pointer-events: none; }
       .search-input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.5rem; font-size: 1rem; border: 2px solid #e0e0e0; border-radius: 30px; outline: none; transition: 0.3s; background-color: #ffffff !important; color: #000000 !important; }
@@ -324,6 +329,8 @@ function getOptimizedUrl(fullUrl, width) {
       }
       .gallery-image { 
         width: 100%; 
+        aspect-ratio: 1.5/1;
+        object-fit: cover;
         height: auto; /* Zdjęcie wymusza swoją naturalną wysokość */
         display: block; 
         transition: transform 0.5s ease; 
