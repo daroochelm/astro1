@@ -241,9 +241,7 @@ function getOptimizedUrl(fullUrl, width) {
         --text-color: #ffffff;
         --accent-color: #d4af37;
       }
-      body {
-        padding-top: 80px; /* Zrób miejsce na nawigację */
-      }
+     
       html, body {
         margin: 0;
         padding: 0;
@@ -252,12 +250,16 @@ function getOptimizedUrl(fullUrl, width) {
         font-family: 'Montserrat', sans-serif;
         /* Usuwamy transition dla background-color, żeby nie było opóźnień */
 }
+
       html {
         scroll-behavior: smooth;
       }
+      body {
+        padding-top: 80px; /* Zrób miejsce na nawigację */
+      }
       main { max-width: 80%; margin: 0 auto; padding: 2rem; font-family: system-ui, sans-serif; background: transparent; min-height: 100vh; }
       
-      .hero-header { text-align: center; margin-top: 2.5rem; margin-bottom: 1rem; }
+      .hero-header { text-align: center; margin-top: 1rem; margin-bottom: 1rem; }
       .hero-header h1 {
         font-size: 3.0rem; font-weight: 800; font-family: ui-serif, Georgia, serif; 
         margin: 0; letter-spacing: -1px;
