@@ -279,24 +279,19 @@ function getOptimizedUrl(fullUrl, width) {
       .filter-section { margin-bottom: 2rem; text-align: center; }
       .filter-legend { display: block; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 3px; color: #888; margin-bottom: 1rem; font-weight: 600; }
       .filters {
-        display: flex;
-        flex-wrap: nowrap; /* Wymusza 1 linię - zabrania zawijania przycisków pod spód */
-        overflow-x: auto;  /* Pozwala na przewijanie w poziomie */
+        display: flex !important;
+        flex-wrap: nowrap !important; /* Wymuszamy 1 linię bezdyskusyjnie */
+        overflow-x: auto !important;  /* Wymuszamy suwak na telefonach */
         gap: 12px;
         padding-bottom: 10px; 
-        
-        /* Płynne przewijanie na telefonach */
         -webkit-overflow-scrolling: touch; 
-        
-        /* Ukrycie brzydkiego paska przewijania (Firefox i Edge) */
         scrollbar-width: none; 
         -ms-overflow-style: none; 
-        }
+      }
 
-/* Ukrycie paska przewijania (Chrome, Safari, Opera) */
-    .filters::-webkit-scrollbar {
-           display: none; 
-        }
+      .filters::-webkit-scrollbar {
+        display: none; 
+      }
       .month-filters { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     
       .month-filters-container { overflow-x: auto; margin-bottom: 2rem; scrollbar-width: none; }
@@ -308,14 +303,9 @@ function getOptimizedUrl(fullUrl, width) {
         text-decoration: none;
       }
       .month-btn {
-          flex-shrink: 0; /* Zabraniamy zgniatania przycisków, gdy brakuje miejsca */
-          white-space: nowrap; /* Tekst (np. "Cały rok") nie złamie się na dwa wiersze */
-          
-          /* 
-            TUTAJ ZOSTAWIASZ SWOJE OBECNE STYLE PRZYCISKU:
-            np. background, color, border, border-radius, padding, transition itp.
-          */
-        }
+        flex-shrink: 0 !important; /* Blokujemy zgniecenie */
+        white-space: nowrap !important; /* Blokujemy łamanie do nowej linii */
+      }
       .filter-btn.active, .month-btn.active { background: #4ade80; color: #000000; font-weight: 500; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
       .count-badge { font-size: 0.65rem; color: #ffffff; background: #111111; font-weight: 500; padding: 2px 7px; border-radius: 12px; }
       .filter-btn.active .count-badge { color: #000000; background: #ffffff; }
