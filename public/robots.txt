@@ -1,0 +1,10 @@
+# Zezwalamy wszystkim standardowym botom (w tym Google) na skanowanie całej strony
+User-agent: *
+Allow: /
+
+# Czerwony dywan specjalnie dla bota Facebooka
+User-agent: facebookexternalhit
+Allow: /
+
+# Wskazujemy botom drogę do mapy strony
+Sitemap: https://naturelowsilesia.pl/sitemap.xml

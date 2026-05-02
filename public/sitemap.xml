@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Strona Główna -->
+  <url>
+    <loc>https://naturelowsilesia.pl/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Galeria: Flora -->
+  <url>
+    <loc>https://naturelowsilesia.pl/flora</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Galeria: Funga (Grzyby) -->
+  <url>
+    <loc>https://naturelowsilesia.pl/grzyby</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Galeria: Fauna (Owady) -->
+  <url>
+    <loc>https://naturelowsilesia.pl/owady</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
