@@ -1,0 +1,70 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-info">
+      <p>&copy; {currentYear} Nature Low Silesia. Wszystkie prawa zastrzeżone.</p>
+      <p class="passion-text">Tworzone z pasją do przyrody Dolnego Śląska 🌿</p>
+    </div>
+    <div class="footer-links">
+      <a href="/polityka-prywatnosci" class="privacy-link">Polityka prywatności</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #1a202c; /* Ciemne, eleganckie tło */
+    color: #a0aec0; /* Delikatny, czytelny szary tekst */
+    padding: 2.5rem 1rem;
+    margin-top: 4rem; /* Odstęp oddzielający stopkę od zdjęć na stronie */
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  /* Wersja dla komputerów (desktop) - układ poziomy */
+  @media (min-width: 768px) {
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .footer-info p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+
+  .passion-text {
+    color: #718096;
+    font-size: 0.85rem;
+    margin-top: 0.25rem !important;
+  }
+
+  .privacy-link {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .privacy-link:hover {
+    color: #48bb78; /* Leśny, zielony akcent po najechaniu myszką */
+    text-decoration: underline;
+  }
+</style>
