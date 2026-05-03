@@ -538,6 +538,7 @@ function getOptimizedUrl(fullUrl, width) {
       clImage.classList.add('loading');
       setTimeout(() => {
         clImage.src = plant.src;
+        clImage.alt = plant.caption; // <--- OTO TWOJA BRAKUJĄCA LINIJKA! Wstawia polską nazwę rośliny jako ALT
         clSidebar.innerHTML = generateSidebarHTML(plant);
         clImage.onload = () => clImage.classList.remove('loading');
       }, 150);
