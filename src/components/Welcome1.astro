@@ -193,10 +193,10 @@ function getOptimizedUrl(fullUrl, width) {
                 ))}
               </div>
 
-              {catImages.length > 4 && (
+              {catImages.length > 8 && (
                 <div class="expand-action">
                   <button class="expand-btn" data-target={cat}>
-                    Zobacz pozostałe {catImages.length - 4} roślin z tej grupy
+                    Zobacz pozostałe {catImages.length - 8} roślin z tej grupy
                   </button>
                 </div>
               )}
@@ -371,7 +371,7 @@ function getOptimizedUrl(fullUrl, width) {
       .gallery-item::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 2; mix-blend-mode: color-dodge; }
       .gallery-item:hover::after { opacity: 1; }
 
-      .expandable-grid:not(.expanded) .gallery-item:nth-child(n+5) { display: none !important; }
+      .expandable-grid:not(.expanded) .gallery-item:nth-child(n+9) { display: none !important; }
 
       .expand-btn { 
         display: block; margin: 2rem auto 0; background: transparent; border: 1px solid #555; 
@@ -525,15 +525,26 @@ function getOptimizedUrl(fullUrl, width) {
         </div>
         <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
         <p style="line-height: 1.6; color: #ddd; font-style: italic;">${plant.description}</p>
+        <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
+        <p style="font-size: 0.7rem; color: #666; margin-top: 1rem;">Opis gatunku bazuje na materiałach z <a href="https://pl.wikipedia.org/" target="_blank" rel="noopener noreferrer" style="color: #666; text-decoration: underline;">Wikipedii</a> i jest udostępniany na licencji CC BY-SA.</p>
         ${relatedHTML}`;
     }
-
+    function getWatermarkedUrl(fullUrl) {
+      if (!fullUrl || !fullUrl.includes('upload/')) return fullUrl;
+      const parts = fullUrl.split('upload/');
+      
+      // Znak wodny: Arial 40, biały, przezroczystość 40%, prawy dolny róg, margines 30px
+      // Dodajemy też od razu optymalizację f_auto,q_auto:good dla dużego zdjęcia!
+      const transformations = "f_auto,q_auto:good,l_text:Arial_20:Nature%20Low%20Silesia,co_white,o_40,g_south_east,x_30,y_30";
+      
+      return `${parts[0]}upload/${transformations}/${parts[1]}`;
+    }
     window.openPlant = (index) => {
       currentIndex = index;
       const plant = allPlantsData[index];
       clImage.classList.add('loading');
       setTimeout(() => {
-        clImage.src = plant.src;
+        clImage.src = getWatermarkedUrl(plant.src);
         clSidebar.innerHTML = generateSidebarHTML(plant);
         clImage.onload = () => clImage.classList.remove('loading');
       }, 150);
