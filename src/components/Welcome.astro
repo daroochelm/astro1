@@ -176,6 +176,7 @@ function getOptimizedUrl(fullUrl, width) {
                       alt={img.caption}
                       loading="lazy"
                       class="gallery-image"
+                      id={`thumb-${img.globalIndex}`}
                     />
                     {img.isFloweringNow && (
                       <div class="flowering-icon-badge" title="Aktualnie kwitnie">
@@ -478,6 +479,54 @@ function getOptimizedUrl(fullUrl, width) {
         .cl-sidebar { width: 100%; height: 50vh; border-left: none; border-top: 1px solid #222; }
         .cl-next { right: 20px; }
       }
+      #cl-image {
+        view-transition-name: active-plant;
+      }
+      /* 1. WYDŁUŻENIE I WYGŁADZENIE LOTU ZDJĘCIA (Krzywa Beziera) */
+      ::view-transition-group(active-plant) {
+        animation-duration: 0.5s;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* Efekt: Szybki start, bardzo miękkie hamowanie na końcu */
+      }
+
+      /* 2. ZAPOBIEGANIE "MRUGANIU/ZMIĘCIU" PODCZAS ZMIANY PROPORCJI */
+      ::view-transition-old(active-plant),
+      ::view-transition-new(active-plant) {
+        /* Wyłącza dziwne mieszanie kolorów między miniaturką a dużym zdjęciem */
+        mix-blend-mode: normal; 
+        /* Gwarantuje, że obrazek podczas lotu zachowa twarde ramy */
+        height: 100%;
+        object-fit: cover; 
+      }
+
+      /* 3. PŁYNNE POJAWIANIE SIĘ PASKA BOCZNEGO (Choreografia) */
+      #cl-sidebar {
+        view-transition-name: sidebar-text;
+      }
+      ::view-transition-group(sidebar-text) {
+        animation-duration: 0.4s;
+        animation-timing-function: ease-out;
+      }
+      ::view-transition-old(sidebar-text) {
+        display: none;
+      }
+      ::view-transition-new(sidebar-text) {
+        /* Dodajemy 0.2s opóźnienia i zmieniamy 'forwards' na 'both' */
+        animation: fade-in-sidebar 0.4s ease-out 0.2s both;
+      }
+
+      /* 4. PŁYNNE PRZYCIEMNIENIE TŁA (Backdrop) */
+      .cl-backdrop {
+        view-transition-name: lightbox-bg;
+      }
+      ::view-transition-group(lightbox-bg) {
+        animation-duration: 0.4s;
+      }
+
+      /* Klatki kluczowe dla paska bocznego (wjazd z prawej strony) */
+      @keyframes fade-in-sidebar {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
     </style>
 
 <script>
@@ -545,23 +594,84 @@ function getOptimizedUrl(fullUrl, width) {
     }
 
     window.openPlant = (index) => {
+      const isAlreadyOpen = !lightbox.classList.contains('hidden');
       currentIndex = index;
       const plant = allPlantsData[index];
-      clImage.classList.add('loading');
-      setTimeout(() => {
-        clImage.src = getWatermarkedUrl(plant.src);
-        clImage.alt = plant.caption; // <--- OTO TWOJA BRAKUJĄCA LINIJKA! Wstawia polską nazwę rośliny jako ALT
-        clSidebar.innerHTML = generateSidebarHTML(plant);
-        clImage.onload = () => clImage.classList.remove('loading');
-      }, 150);
-      lightbox.classList.remove('hidden');
-      document.body.classList.add('lightbox-open');
+      const activeThumb = document.getElementById(`thumb-${index}`);
+
+      // Zmieniamy updateDOM w funkcję asynchroniczną, która zwraca Promise
+      const updateDOM = () => {
+        return new Promise((resolve) => {
+          clImage.alt = plant.caption;
+          clSidebar.innerHTML = generateSidebarHTML(plant);
+          lightbox.classList.remove('hidden');
+          document.body.classList.add('lightbox-open');
+
+          // Definiujemy co ma się stać, gdy zdjęcie dotrze
+          clImage.onload = () => {
+            clImage.classList.remove('loading');
+            resolve(); // KLUCZOWE: Dajemy przeglądarce zielone światło na start animacji!
+          };
+          
+          clImage.onerror = () => {
+            clImage.classList.remove('loading');
+            resolve(); // W razie błędu serwera puszczamy animację, żeby nie zawiesić strony
+          };
+
+          // Zaczynamy pobierać zdjęcie (to wyzwoli onload)
+          clImage.src = getWatermarkedUrl(plant.src);
+
+          // Zabezpieczenie dla zdjęć, które są już w pamięci podręcznej (cache)
+          if (clImage.complete) {
+            clImage.onload = null;
+            clImage.classList.remove('loading');
+            resolve();
+          }
+        });
+      };
+
+      if (!document.startViewTransition) {
+        updateDOM();
+        return;
+      }
+
+      if (activeThumb && !isAlreadyOpen) {
+        activeThumb.style.viewTransitionName = 'active-plant';
+      }
+
+      // startViewTransition automatycznie poczeka na nasz resolve() z Promise!
+      const transition = document.startViewTransition(() => updateDOM());
+
+      transition.finished.finally(() => {
+        if (activeThumb) activeThumb.style.viewTransitionName = '';
+      });
     };
 
     window.closeLightbox = () => {
-      lightbox.classList.add('hidden');
-      document.body.classList.remove('lightbox-open');
-      setTimeout(() => { clImage.src = ''; }, 300);
+      const activeThumb = document.getElementById(`thumb-${currentIndex}`);
+
+      const updateDOM = () => {
+        lightbox.classList.add('hidden');
+        document.body.classList.remove('lightbox-open');
+      };
+
+      if (!document.startViewTransition) {
+        updateDOM();
+        setTimeout(() => { clImage.src = ''; }, 300);
+        return;
+      }
+
+      // Przed zamknięciem znów wiążemy duże zdjęcie z miniaturką, do której ma "wrócić"
+      if (activeThumb) activeThumb.style.viewTransitionName = 'active-plant';
+
+      const transition = document.startViewTransition(() => {
+        updateDOM();
+      });
+
+      transition.finished.finally(() => {
+        if (activeThumb) activeThumb.style.viewTransitionName = '';
+        clImage.src = ''; // Czyścimy src dopiero po schowaniu animacji
+      });
     };
 
     window.prevPlant = (e) => { e?.stopPropagation(); window.openPlant(currentIndex > 0 ? currentIndex - 1 : allPlantsData.length - 1); };
