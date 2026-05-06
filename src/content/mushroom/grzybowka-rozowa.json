@@ -1,0 +1,15 @@
+{
+    "src": "https://res.cloudinary.com/drvpquisg/image/upload/v1778095866/grzybowka_rozowa_cnez6h.jpg",
+    "thumb": "https://res.cloudinary.com/drvpquisg/image/upload/v1778095866/grzybowka_rozowa_cnez6h.jpg",
+    "caption": "Grzybówka różowa",
+    "latina": "(Mycena rosea Gramberg)",
+    "family": "grzybówkowate",
+    "fructing": "Maj-październik",
+    "months": [5, 6, 7, 8, 9, 10, 11],
+    "habitat": "Występuje na wszystkich kontynentach poza Australią i Antarktydą. W Europie jest pospolity.",
+    "occurrence": "Rośnie na ziemi w lasach liściastych i mieszanych na ściółce leśnej, szczególnie często na glebach wapiennych.",
+    "protection": "Brak ochrony gatunkowej",
+    "description": "Mimo atrakcyjnego, bajkowego koloru, jest uznawana za grzyb trujący, zawierający muskarynę, która powoduje zatrucia.",
+    "category": "Pieczarkowce",
+    "id": 53
+    }
